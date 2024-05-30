@@ -38,6 +38,13 @@ export const courses = [
     completion: 40,
     image: image,
   },
+  {
+    name: "Accounting Basics",
+    lessons: 7,
+    completion: 25,
+    image:
+      "https://img.freepik.com/free-photo/businesspeople-working-finance-accounting-analyze-financi_74952-1411.jpg?t=st=1717075538~exp=1717079138~hmac=2d467bc3d99eaa5fcdf8b157cd794c3cc7e9241fa99fa53f60703c5ce1e1d701&w=1380",
+  },
 ];
 
 export const courseDetail = {
@@ -62,8 +69,10 @@ export const courseDetail = {
           question:
             "Which of the following is a fundamental principle of financial accounting?",
           options: [
+            "Cash flow management",
             "Matching expenses with revenues",
             "Estimating future profits",
+            "To track day-to-day cash flow operations",
           ],
         },
       ],
@@ -86,8 +95,10 @@ export const courseDetail = {
           question:
             "Which of the following is a fundamental principle of financial accounting?",
           options: [
+            "Cash flow management",
             "Matching expenses with revenues",
             "Estimating future profits",
+            "To track day-to-day cash flow operations",
           ],
         },
       ],
@@ -115,9 +126,63 @@ export const courseDetail = {
             "Variance analysis",
             "Simple addition",
             "Basic subtraction",
+            "To track day-to-day cash flow operations",
           ],
         },
       ],
     },
   ],
 };
+
+export const exams = [
+  {
+    id: 5,
+    image:
+      "https://img.freepik.com/free-photo/abstract-networking-concept-still-life-composition_23-2149035687.jpg?t=st=1717091807~exp=1717095407~hmac=1a6fecb4304d9c90015708adfb1c01045db932b364f731dc84703f1937fe9a6f&w=1380",
+    time: "1.5 hours",
+    title: "Data Structures",
+    status: "passed",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum facilis harum rem dolores, non esse neque repellat cum saepe.",
+  },
+  {
+    id: 1,
+    image:
+      "https://img.freepik.com/free-photo/ai-site-helping-with-software-production_1268-21620.jpg?t=st=1717090413~exp=1717094013~hmac=5f1eb9e02cc9a7c4ca22595e0bb3c36ec15f7750e582c3c51265cd943c3d73a2&w=1380",
+    time: "2 hours",
+    title: "Reactjs mastery",
+    status: "not started",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum facilis harum rem dolores, non esse neque repellat cum saepe.",
+  },
+  {
+    id: 2,
+    image:
+      "https://img.freepik.com/free-photo/abstract-networking-concept-still-life-composition_23-2149035687.jpg?t=st=1717091807~exp=1717095407~hmac=1a6fecb4304d9c90015708adfb1c01045db932b364f731dc84703f1937fe9a6f&w=1380",
+    time: "1.5 hours",
+    title: "Data Structures",
+    status: "passed",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum facilis harum rem dolores, non esse neque repellat cum saepe.",
+  },
+  {
+    id: 3,
+    image:
+      "https://img.freepik.com/free-photo/online-business-database_53876-95876.jpg?t=st=1717091956~exp=1717095556~hmac=3bdcc483968836e5eee66ba72394d0317ca0330f6243ad25544f8f6268d79323&w=826",
+    time: "2 hours",
+    title: "Database",
+    status: "failed",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum facilis harum rem dolores, non esse neque repellat cum saepe.",
+  },
+  {
+    id: 4,
+    image:
+      "https://img.freepik.com/free-photo/abstract-networking-concept-still-life-composition_23-2149035687.jpg?t=st=1717091807~exp=1717095407~hmac=1a6fecb4304d9c90015708adfb1c01045db932b364f731dc84703f1937fe9a6f&w=1380",
+    time: "1.5 hours",
+    title: "Data Structures",
+    status: "passed",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum facilis harum rem dolores, non esse neque repellat cum saepe.",
+  },
+];
