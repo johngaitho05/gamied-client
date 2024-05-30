@@ -2,7 +2,7 @@ import image from "../assets/course.webp";
 export const links = [
   {
     name: "courses",
-    link: "/courses",
+    link: "/",
   },
   {
     name: "exams",
@@ -37,5 +37,33 @@ export const courses = [
     lessons: 8,
     completion: 40,
     image: image,
+  },
+];
+
+export const coursesDetail = [
+  {
+    title:
+      "Introduction to Financial Accounting: Understanding the Fundamentals",
+    completed: true,
+    resources: ["Basics of accounting", "Accounting fundamentals"],
+    assessment: [
+      {
+        question: "What is the primary purpose of financial accounting?",
+        options: [
+          "To provide internal reports for management's decision-making",
+          "To prepare tax returns for the government",
+          "To provide financial information to external stakeholders such as investors and creditors",
+          "To track day-to-day cash flow operations",
+        ],
+      },
+      {
+        question:
+          "Which of the following is a fundamental principle of financial accounting?",
+        options: [
+          "Matching expenses with revenues",
+          "Estimating future profits",
+        ],
+      },
+    ],
   },
 ];

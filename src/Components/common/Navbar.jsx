@@ -56,7 +56,7 @@ const Header = () => {
     <div
       className={`w-full fixed top-0 left-0 z-20  ${
         scrolled ? "bg-white shadow-md" : " lg:bg-transparent"
-      }  ${open ? "bg-white lg:bg-transparent" : "shadow-md "}`}
+      }  ${open ? "bg-white lg:bg-transparent" : " "}`}
     >
       <div className="md:flex items-center justify-between  py-2 md:px-0 px-7   max-w-7xl mx-auto">
         <div

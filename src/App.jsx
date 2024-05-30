@@ -1,15 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
-import Navbar from "./Components/common/Navbar";
-import Footer from "./Components/common/Footer";
-import Courses from "./Components/courses";
+import Path from "./Routes/index";
 
 const App = () => {
   return (
-    <div className="App ">
+    <div className=" ">
       <BrowserRouter>
-        <Navbar />
-        <Courses />
-        <Footer />
+        <Path />
       </BrowserRouter>
     </div>
   );

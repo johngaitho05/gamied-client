@@ -8,7 +8,7 @@ const CourseCard = ({ name, lessons, completion, image }) => {
       <img className="w-full h-48 object-cover" src={image} alt={name} />
       <div className="p-4">
         <h2 className="font-semibold text-lg mb-2">{name}</h2>
-        <div className="flex  items-center justify-between">
+        <div className="flex  items-center justify-between mt-4">
           {" "}
           <p className="text-gray-600 mb-4">{lessons} Lessons</p>
           <div className="flex items-center justify-between">
