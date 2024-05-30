@@ -5,6 +5,7 @@ import { AlignJustify, X, User } from "lucide-react";
 import { links } from "../../data";
 import { Button, Dropdown, Select, Avatar } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import Image from "../../assets/profile2.jpg";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -104,8 +105,12 @@ const Header = () => {
                 placement="bottomRight"
                 className="p-0"
               >
-                <div className="border-none text-white text-md">
-                  <Avatar />
+                <div className="border-none text-white text-md flex gap-2">
+                  <img
+                    src={Image}
+                    alt=""
+                    className="h-[3rem ] w-[3rem] rounded-full"
+                  />
                   <DownOutlined className="text-black mr-2 mt-2" />
                 </div>
               </Dropdown>

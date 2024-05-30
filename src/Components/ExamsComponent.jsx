@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import ExamCard from "../Components/global/ExamCard";
 import ExamModal from "../Components/ExamModal";
 import { exams } from "../data/index";
+import { useNavigate } from "react-router-dom";
 
 const Exam = () => {
   const [selectedExam, setSelectedExam] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleExamClick = (exam) => {
     setSelectedExam(exam);
@@ -17,8 +19,10 @@ const Exam = () => {
     setSelectedExam(null);
   };
 
-  const handleProceed = () => {
+  const handleProceed = (id) => {
     console.log("Proceeding with exam:", selectedExam);
+    navigate(`/exams/${id}`);
+
     setShowModal(false);
   };
 
@@ -35,7 +39,7 @@ const Exam = () => {
         <ExamModal
           exam={selectedExam}
           onClose={handleCloseModal}
-          onProceed={handleProceed}
+          onProceed={handleProceed(1)}
         />
       )}
     </div>
