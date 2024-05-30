@@ -23,8 +23,8 @@ export default {
           dark: "#3A5e27",
           light: "#859448",
         },
-        "gray-light": {
-          DEFAULT: "#EEEEEE",
+        cta: {
+          DEFAULT: "#6f448a",
         },
 
         "white-100": {

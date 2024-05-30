@@ -88,7 +88,9 @@ const Header = () => {
               <a
                 href={link.link}
                 className={` hover:text-red-400 duration-500  ${
-                  location.pathname === link.link ? "text-orange-500" : ""
+                  location.pathname === link.link
+                    ? "text-orange-500 border-b-4 border-cta"
+                    : ""
                 }`}
               >
                 {link.name}
