@@ -34,12 +34,13 @@ const ExamCard = ({ exam, onClick }) => {
     <Card
       className={`border rounded-lg shadow-lg  mb-4 cursor-pointer p-0`}
       onClick={() => onClick(exam)}
+      cover={<img
+          src={exam.image}
+          alt={exam.title}
+          className="w-full h-48 object-cover  mb-4"
+      />}
+      hoverable
     >
-      <img
-        src={exam.image}
-        alt={exam.title}
-        className="w-full h-48 object-cover  mb-4"
-      />
       <h3 className="text-lg font-semibold mb-2 p-4">{exam.title}</h3>
       <div className="flex items-center justify-between p-4">
         <p className="text-sm text-gray-600">Time: {exam.time}</p>

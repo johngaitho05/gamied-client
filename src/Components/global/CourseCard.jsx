@@ -10,8 +10,9 @@ const CourseCard = ({ name, lessons, completion, image }) => {
     <Card
       className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white p-0"
       onClick={() => navigate(`course/${1}`)}
+      cover={<img className="w-full h-48 object-cover" src={image} alt={name}/>}
+      hoverable
     >
-      <img className="w-full h-48 object-cover" src={image} alt={name} />
       <div className="p-4">
         <h2 className="font-semibold text-lg mb-2">{name}</h2>
         <div className="flex  items-center justify-between mt-4">
