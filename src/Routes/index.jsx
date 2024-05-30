@@ -4,6 +4,7 @@ import CoursesPage from "../pages/courses";
 import CoursesDetailPage from "../pages/CourseDetail";
 import ExamsPage from "../pages/ExamsPage";
 import ExamsDetailPage from "../pages/ExamDetails";
+import Profile from "../Components/profile/Profile";
 
 const index = () => {
   return (
@@ -13,6 +14,7 @@ const index = () => {
         <Route path="/course/:id" element={<CoursesDetailPage />} />
         <Route path="/exams" element={<ExamsPage />} />
         <Route path="/exams/:id" element={<ExamsDetailPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

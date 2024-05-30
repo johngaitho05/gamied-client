@@ -24,7 +24,7 @@ export const courses = [
     title: "Marketing 101",
     lessons: 10,
     progress: 50,
-    progress: 25,
+
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     thumbnail:
@@ -34,7 +34,7 @@ export const courses = [
     title: "Introduction to Python",
     lessons: 5,
     progress: 75,
-    progress: 25,
+
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     thumbnail:
@@ -44,19 +44,19 @@ export const courses = [
     title: "Project Management",
     lessons: 8,
     progress: 40,
-    thumbnail: Image,
-    progress: 25,
+    thumbnail: image,
+
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
   {
     title: "Accounting Basics",
     lessons: 7,
-    completion: 25,
     progress: 25,
+
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    image:
+    thumbnail:
       "https://img.freepik.com/free-photo/businesspeople-working-finance-accounting-analyze-financi_74952-1411.jpg?t=st=1717075538~exp=1717079138~hmac=2d467bc3d99eaa5fcdf8b157cd794c3cc7e9241fa99fa53f60703c5ce1e1d701&w=1380",
   },
 ];

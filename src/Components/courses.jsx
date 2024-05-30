@@ -11,10 +11,10 @@ const Courses = () => {
         {courses.map((course, index) => (
           <CourseCard
             key={index}
-            name={course.name}
-            lessons={course.lessons}
-            completion={course.completion}
-            image={course.image}
+            name={course?.title}
+            lessons={course?.lessons}
+            completion={course?.progress}
+            image={course?.thumbnail}
           />
         ))}
       </div>
