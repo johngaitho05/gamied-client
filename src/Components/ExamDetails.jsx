@@ -7,6 +7,15 @@ const Exam = () => {
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
 
   useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const message =
+        "You have unfinished changes. Are you sure you want to leave?";
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
@@ -18,7 +27,10 @@ const Exam = () => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      clearInterval(timer);
+    };
   }, []);
 
   const handleOptionChange = (questionId, option) => {
@@ -34,6 +46,7 @@ const Exam = () => {
   };
 
   const handleSubmit = () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
     console.log("Submitting exam with answers:", selectedAnswers);
     // Add your submit logic here
   };
@@ -87,7 +100,7 @@ const Exam = () => {
           <button
             onClick={handleNext}
             disabled={currentQuestion === questions.length - 1}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue hover:bg-blue-500 text-white px-4 py-2 rounded"
           >
             Next
           </button>

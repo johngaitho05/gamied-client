@@ -74,7 +74,7 @@ const Header = () => {
           onClick={() => setOpen(!open)}
           className="absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7"
         >
-          {open ? <X color="#222" /> : <AlignJustify color="#fff" />}
+          {open ? <X color="#222" /> : <AlignJustify color="#222" />}
         </div>
         <ul
           className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static  md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in text-secondary ${
@@ -88,9 +88,9 @@ const Header = () => {
             >
               <a
                 href={link.link}
-                className={` hover:text-red-400 duration-500  ${
+                className={` hover:text-cta duration-500  ${
                   location.pathname === link.link
-                    ? "text-orange-500 border-b-4 border-cta"
+                    ? "text-cta border-b-4 border-blue"
                     : ""
                 }`}
               >

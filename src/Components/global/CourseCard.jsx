@@ -2,12 +2,13 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
+import { Card } from "antd";
 
 const CourseCard = ({ name, lessons, completion, image }) => {
   const navigate = useNavigate();
   return (
-    <div
-      className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white"
+    <Card
+      className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white p-0"
       onClick={() => navigate(`course/${1}`)}
     >
       <img className="w-full h-48 object-cover" src={image} alt={name} />
@@ -22,8 +23,8 @@ const CourseCard = ({ name, lessons, completion, image }) => {
               text={`${completion}%`}
               styles={buildStyles({
                 textSize: "24px",
-                pathColor: `rgba(62, 152, 199, ${completion / 100})`,
-                textColor: "#3e98c7",
+                pathColor: `rgba(255, 165, 0, ${completion / 100})`,
+                textColor: "#FFA500",
                 trailColor: "#d6d6d6",
               })}
               className="w-16 h-16"
@@ -31,7 +32,7 @@ const CourseCard = ({ name, lessons, completion, image }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

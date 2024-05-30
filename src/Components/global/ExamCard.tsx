@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FaTimesCircle, FaCheckCircle, FaHourglassHalf } from "react-icons/fa";
+import { Card } from "antd";
 
 const ExamCard = ({ exam, onClick }) => {
   const getStatusStyle = (status) => {
@@ -30,8 +31,8 @@ const ExamCard = ({ exam, onClick }) => {
   };
 
   return (
-    <div
-      className={`border rounded-lg shadow-lg  mb-4 cursor-pointer `}
+    <Card
+      className={`border rounded-lg shadow-lg  mb-4 cursor-pointer p-0`}
       onClick={() => onClick(exam)}
     >
       <img
@@ -51,7 +52,7 @@ const ExamCard = ({ exam, onClick }) => {
           <span>{exam.status}</span>
         </button>
       </div>
-    </div>
+    </Card>
   );
 };
 

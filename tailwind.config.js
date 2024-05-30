@@ -24,11 +24,11 @@ export default {
           light: "#859448",
         },
         cta: {
-          DEFAULT: "#6f448a",
+          DEFAULT: "#FF914D",
         },
 
-        "white-100": {
-          DEFAULT: "#f3f3f3",
+        blue: {
+          DEFAULT: "#15729F",
         },
       },
       boxShadow: {
