@@ -34,6 +34,7 @@ const ExamCard = ({ exam, onClick }) => {
     <Card
       className={`border rounded-lg shadow-lg  mb-4 cursor-pointer p-0`}
       onClick={() => onClick(exam)}
+      hoverable
     >
       <img
         src={exam.image}

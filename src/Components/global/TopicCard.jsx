@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { Card } from "antd";
 
 const TopicCard = ({ topic }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=" rounded-md shadow-md p-4 mb-4 bg-gray-200">
+    <Card className=" rounded-md shadow-md p-4 mb-4 bg-gray-200">
       <div
         className="flex items-center justify-between cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
@@ -56,7 +57,7 @@ const TopicCard = ({ topic }) => {
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 };
 

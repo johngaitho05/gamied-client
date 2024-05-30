@@ -10,6 +10,8 @@ const CourseCard = ({ name, lessons, completion, image }) => {
     <Card
       className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white p-0"
       onClick={() => navigate(`course/${1}`)}
+      hoverable
+      style={{ padding: 0 }}
     >
       <img className="w-full h-48 object-cover" src={image} alt={name} />
       <div className="p-4">
