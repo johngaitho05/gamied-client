@@ -1,10 +1,15 @@
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 
 const CourseCard = ({ name, lessons, completion, image }) => {
+  const navigate = useNavigate();
   return (
-    <div className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white">
+    <div
+      className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white"
+      onClick={() => navigate(`course/${1}`)}
+    >
       <img className="w-full h-48 object-cover" src={image} alt={name} />
       <div className="p-4">
         <h2 className="font-semibold text-lg mb-2">{name}</h2>

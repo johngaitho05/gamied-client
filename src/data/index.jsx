@@ -40,30 +40,84 @@ export const courses = [
   },
 ];
 
-export const coursesDetail = [
-  {
-    title:
-      "Introduction to Financial Accounting: Understanding the Fundamentals",
-    completed: true,
-    resources: ["Basics of accounting", "Accounting fundamentals"],
-    assessment: [
-      {
-        question: "What is the primary purpose of financial accounting?",
-        options: [
-          "To provide internal reports for management's decision-making",
-          "To prepare tax returns for the government",
-          "To provide financial information to external stakeholders such as investors and creditors",
-          "To track day-to-day cash flow operations",
-        ],
-      },
-      {
-        question:
-          "Which of the following is a fundamental principle of financial accounting?",
-        options: [
-          "Matching expenses with revenues",
-          "Estimating future profits",
-        ],
-      },
-    ],
-  },
-];
+export const courseDetail = {
+  title: "Financial Accounting",
+  topics: [
+    {
+      title:
+        "Introduction to Financial Accounting: Understanding the Fundamentals",
+      completed: true,
+      resources: ["Basics of accounting", "Accounting fundamentals"],
+      assessment: [
+        {
+          question: "What is the primary purpose of financial accounting?",
+          options: [
+            "To provide internal reports for management's decision-making",
+            "To prepare tax returns for the government",
+            "To provide financial information to external stakeholders such as investors and creditors",
+            "To track day-to-day cash flow operations",
+          ],
+        },
+        {
+          question:
+            "Which of the following is a fundamental principle of financial accounting?",
+          options: [
+            "Matching expenses with revenues",
+            "Estimating future profits",
+          ],
+        },
+      ],
+    },
+    {
+      title: "Mastering Debits and Credits: The Language of Accounting",
+      completed: false,
+      resources: ["Basics of accounting", "Accounting fundamentals"],
+      assessment: [
+        {
+          question: "What is the primary purpose of financial accounting?",
+          options: [
+            "To provide internal reports for management's decision-making",
+            "To prepare tax returns for the government",
+            "To provide financial information to external stakeholders such as investors and creditors",
+            "To track day-to-day cash flow operations",
+          ],
+        },
+        {
+          question:
+            "Which of the following is a fundamental principle of financial accounting?",
+          options: [
+            "Matching expenses with revenues",
+            "Estimating future profits",
+          ],
+        },
+      ],
+    },
+    {
+      title: "Advanced Financial Accounting Techniques",
+      completed: false,
+      resources: [
+        "Advanced accounting principles",
+        "Financial statement analysis",
+      ],
+      assessment: [
+        {
+          question: "What is a key feature of advanced financial accounting?",
+          options: [
+            "Basic bookkeeping",
+            "In-depth financial analysis",
+            "Preparation of tax returns",
+            "Cash flow management",
+          ],
+        },
+        {
+          question: "Which technique is used in advanced financial accounting?",
+          options: [
+            "Variance analysis",
+            "Simple addition",
+            "Basic subtraction",
+          ],
+        },
+      ],
+    },
+  ],
+};
