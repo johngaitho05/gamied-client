@@ -37,11 +37,11 @@ const Header = () => {
   const items = [
     {
       key: "1",
-      label: <Link to={"/dashboard"}>Jane Doe</Link>,
+      label: <Link to={"/profile"}>Jane Doe</Link>,
     },
     {
       key: "2",
-      label: <Link to={"/dashboard"}>Dashboard</Link>,
+      label: <Link to={"/profile"}>Dashboard</Link>,
     },
     {
       key: "3",

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Sidebar from "./sidebar";
 import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Layout = ({ children }) => {
   // toggle sidebar
@@ -37,8 +38,12 @@ const Layout = ({ children }) => {
         }`}
       >
         {/* menu icon to open and close sidebar */}
-        <div className=" shadow-lg text-text fixed   flex gap-2 w-full top-0 bg-white text-gray-600 py-3 px-5 z-40 b">
-          <Menu onClick={toggleSidebar} className="cursor-pointer" /> Profile
+        <div className=" shadow-lg text-text fixed   flex gap-2 w-full top-0 bg-white text-gray-600 py-3 px-5 z-40 font-bold">
+          <Menu onClick={toggleSidebar} className="cursor-pointer" />
+          <p>Profile </p>
+          <Link to="/" className="font-bold ml-4">
+            Back Home
+          </Link>
         </div>
         <br />
 
