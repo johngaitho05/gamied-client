@@ -5,7 +5,7 @@ import CoursesDetailPage from "../pages/CourseDetail";
 import ExamsPage from "../pages/ExamsPage";
 import ExamsDetailPage from "../pages/ExamDetails";
 import AssessmentPage from "../pages/AssesmentPage";
-import Profile from "../Components/profile/Profile";
+import Profile from "../pages/ProfilePage";
 
 const index = () => {
   return (

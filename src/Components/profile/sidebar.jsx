@@ -21,7 +21,7 @@ const Sidebar = ({ sidebar, toggleSidebar }) => {
 
   return (
     <div
-      className={` pt-5 fixed top-0 left-0  z-50  text-text   h-screen   transform duration-300  shadow-lg border-r  flex flex-col  ${
+      className={` pt-5  top-0 left-0    text-text   h-screen   transform duration-300  shadow-lg border-r border-t  flex flex-col  ${
         activeIndex !== null ? "overflow-y-scroll custom-scrollbar" : ""
       } ${sidebar ? "w-[19rem]" : ""}`}
     >
