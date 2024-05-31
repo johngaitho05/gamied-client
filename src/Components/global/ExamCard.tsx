@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FaTimesCircle, FaCheckCircle, FaHourglassHalf } from "react-icons/fa";
 import { Card } from "antd";
 import { BsClockFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const ExamCard = ({ exam, onClick }) => {
   const getStatusStyle = (status) => {
@@ -41,10 +42,12 @@ const ExamCard = ({ exam, onClick }) => {
       : `${minutes} min`;
   };
 
+  const navigate = useNavigate();
+
   return (
     <Card
       className={`border rounded-lg shadow-lg mb-4 cursor-pointer p-0`}
-      onClick={() => onClick(exam)}
+      onClick={() =>navigate("/exams/1")}
       cover={
         <img
           src={exam.thumbnail}
