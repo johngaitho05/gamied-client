@@ -5,7 +5,8 @@ import { Card } from "antd";
 import { BsClockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const ExamCard = ({ exam }) => {
+const ExamCard = ({ exam, handleExamClick }) => {
+  console.log(exam);
   const getStatusStyle = (status) => {
     switch (status) {
       case "failed":
@@ -47,7 +48,7 @@ const ExamCard = ({ exam }) => {
   return (
     <Card
       className={`border rounded-lg shadow-lg mb-4 cursor-pointer p-0`}
-      onClick={() => navigate("/exams/1")}
+      onClick={() => handleExamClick(exam)}
       cover={
         <img
           src={exam.thumbnail}
