@@ -188,7 +188,7 @@ export const lessons = [{}];
 
 export const assessments = [
   {
-    id: 5,
+    id: 1,
     title: "Data Structures",
     pass_mark: 70,
     description:

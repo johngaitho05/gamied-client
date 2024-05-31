@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaCheckCircle,
   FaExclamationCircle,
-  FaChevronDown,
+  FaChevronRight,
   FaChevronUp,
 } from "react-icons/fa";
-import { Card, Collapse } from "antd";
+import { Collapse } from "antd";
 import { Link } from "react-router-dom";
-// import "antd/dist/antd.css";
 
 const { Panel } = Collapse;
 
 const TopicCard = ({ singleLesson }) => {
-  console.log(singleLesson.assessment.questions);
+  const [activeKey, setActiveKey] = useState(null);
+
+  const handlePanelChange = (key) => {
+    setActiveKey(key);
+  };
+
   return (
     <div className=" mb-4 bg-gray-200">
       <Collapse
         expandIcon={({ isActive }) =>
-          isActive ? <FaChevronUp /> : <FaChevronDown />
+          isActive ? <FaChevronUp /> : <FaChevronRight />
         }
+        expandIconPosition="right"
+        accordion={true} // Ensure only one panel is open at a time
+        activeKey={activeKey}
+        onChange={handlePanelChange}
       >
         <Panel
           header={
@@ -31,7 +39,7 @@ const TopicCard = ({ singleLesson }) => {
               <h3 className="text-lg font-semibold">{singleLesson.title}</h3>
             </div>
           }
-          key="1"
+          key={singleLesson?.id} // Make sure each panel has a unique key
         >
           <div className="mt-4">
             <div className="mb-4 ">
