@@ -109,7 +109,7 @@ const Header = () => {
                   <img
                     src={Image}
                     alt=""
-                    className="h-[3rem ] w-[3rem] rounded-full"
+                    className="h-[2rem ] w-[2rem] rounded-full"
                   />
                   <DownOutlined className="text-black mr-2 mt-2" />
                 </div>
