@@ -1,13 +1,16 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import CourseDetails from "../Components/CourseDetail";
-import { courseDetail } from "../data";
+import { SingleCourse, singleLesson } from "../data";
 
 const CourseDetailPage = () => {
   return (
     <div>
       <Layout>
-        <CourseDetails courseDetail={courseDetail} />
+        <CourseDetails
+          courseDetail={SingleCourse[0]}
+          singleLesson={singleLesson[0]}
+        />
       </Layout>
     </div>
   );

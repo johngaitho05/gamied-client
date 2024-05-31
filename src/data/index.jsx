@@ -61,93 +61,6 @@ export const courses = [
   },
 ];
 
-export const courseDetail = {
-  title: "Financial Accounting",
-  topics: [
-    {
-      title:
-        "Introduction to Financial Accounting: Understanding the Fundamentals",
-      completed: true,
-      resources: ["Basics of accounting", "Accounting fundamentals"],
-      assessment: [
-        {
-          question: "What is the primary purpose of financial accounting?",
-          options: [
-            "To provide internal reports for management's decision-making",
-            "To prepare tax returns for the government",
-            "To provide financial information to external stakeholders such as investors and creditors",
-            "To track day-to-day cash flow operations",
-          ],
-        },
-        {
-          question:
-            "Which of the following is a fundamental principle of financial accounting?",
-          options: [
-            "Cash flow management",
-            "Matching expenses with revenues",
-            "Estimating future profits",
-            "To track day-to-day cash flow operations",
-          ],
-        },
-      ],
-    },
-    {
-      title: "Mastering Debits and Credits: The Language of Accounting",
-      completed: false,
-      resources: ["Basics of accounting", "Accounting fundamentals"],
-      assessment: [
-        {
-          question: "What is the primary purpose of financial accounting?",
-          options: [
-            "To provide internal reports for management's decision-making",
-            "To prepare tax returns for the government",
-            "To provide financial information to external stakeholders such as investors and creditors",
-            "To track day-to-day cash flow operations",
-          ],
-        },
-        {
-          question:
-            "Which of the following is a fundamental principle of financial accounting?",
-          options: [
-            "Cash flow management",
-            "Matching expenses with revenues",
-            "Estimating future profits",
-            "To track day-to-day cash flow operations",
-          ],
-        },
-      ],
-    },
-    {
-      title: "Advanced Financial Accounting Techniques",
-      completed: false,
-      resources: [
-        "Advanced accounting principles",
-        "Financial statement analysis",
-      ],
-      assessment: [
-        {
-          question: "What is a key feature of advanced financial accounting?",
-          options: [
-            "Basic bookkeeping",
-            "In-depth financial analysis",
-            "Preparation of tax returns",
-            "Cash flow management",
-          ],
-        },
-        {
-          question: "Which technique is used in advanced financial accounting?",
-          options: [
-            "Variance analysis",
-            "Simple addition",
-            "Basic subtraction",
-            "To track day-to-day cash flow operations",
-          ],
-        },
-      ],
-    },
-  ],
-};
-
 export const exams = [
   {
     id: 5,
@@ -410,3 +323,128 @@ const questions = [
 ];
 
 export default questions;
+
+export const SingleCourse = [
+  {
+    title: "Accounting Basics",
+    lessons: 7,
+    progress: 25,
+    description:
+      "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    thumbnail:
+      "https://img.freepik.com/free-photo/businesspeople-working-finance-accounting-analyze-financi_74952-1411.jpg?t=st=1717075538~exp=1717079138~hmac=2d467bc3d99eaa5fcdf8b157cd794c3cc7e9241fa99fa53f60703c5ce1e1d701&w=1380",
+
+    lessons: [
+      {
+        id: 1,
+        title:
+          "Introduction to Financial Accounting: Understanding the Fundamentals",
+        completed: true,
+      },
+      {
+        id: 2,
+        title:
+          "Introduction to Financial Accounting: Understanding the Fundamentals",
+        completed: true,
+      },
+      {
+        id: 3,
+        title:
+          "Introduction to Financial Accounting: Understanding the Fundamentals",
+        completed: false,
+      },
+      {
+        id: 4,
+        title:
+          "Introduction to Financial Accounting: Understanding the Fundamentals",
+        completed: true,
+      },
+    ],
+  },
+];
+
+export const singleLesson = [
+  {
+    id: 12,
+    title: "Introduction to Data Structures",
+    completed: false,
+    content: [
+      {
+        id: 4,
+        title: "Data Structures Overview",
+        href: "https://en.wikipedia.org/wiki/Data_structure",
+      },
+      {
+        id: 5,
+        title: "Arrays and Linked Lists",
+        href: "https://en.wikipedia.org/wiki/Array_data_structure",
+      },
+      {
+        id: 6,
+        title: "Stacks and Queues",
+        href: "https://en.wikipedia.org/wiki/Stack_(abstract_data_type)",
+      },
+    ],
+    assessment: {
+      id: 7,
+      completed: false,
+      questions: [
+        {
+          id: 14,
+          name: "What is a data structure?",
+          points: 60,
+          answers: [
+            {
+              id: 32,
+              name: "A way to store and organize data",
+              is_correct: true,
+            },
+            {
+              id: 33,
+              name: "A type of algorithm",
+              is_correct: false,
+            },
+          ],
+          lost_points: 0,
+        },
+        {
+          id: 15,
+          name: "Which of the following is a linear data structure?",
+          points: 60,
+          answers: [
+            {
+              id: 34,
+              name: "Binary Tree",
+              is_correct: false,
+            },
+            {
+              id: 35,
+              name: "Array",
+              is_correct: true,
+            },
+          ],
+          lost_points: 0,
+        },
+        {
+          id: 16,
+          name: "What is the time complexity of accessing an element in an array?",
+          points: 60,
+          answers: [
+            {
+              id: 36,
+              name: "O(n)",
+              is_correct: false,
+            },
+            {
+              id: 37,
+              name: "O(1)",
+              is_correct: true,
+            },
+          ],
+          lost_points: 0,
+        },
+      ],
+    },
+  },
+];
+export const lessons = [{}];
