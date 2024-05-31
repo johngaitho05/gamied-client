@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex max-w-7xl  ">
+    <div className="flex   ">
       {/* Sidebar */}
       {sidebar && <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar} />}
       <div
