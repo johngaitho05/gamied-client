@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import questions from "../data/index"; // Import the questions
+import { singleAssessment } from "../data/index"; // Import the questions
 
 const Exam = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
+  const questions = singleAssessment?.questions;
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -68,24 +69,24 @@ const Exam = () => {
       </div>
       <div className="border p-4 rounded-lg">
         <h2 className="text-lg font-semibold mb-4">
-          {questions[currentQuestion].question}
+          {questions[currentQuestion].name}
         </h2>
         <div>
-          {questions[currentQuestion].options.map((option, index) => (
+          {questions[currentQuestion].answers?.map((option, index) => (
             <label key={index} className="block mb-2">
               <input
                 type="radio"
                 name={`question-${currentQuestion}`}
-                value={option}
+                value={option.name} // Changed from `option` to `option.name`
                 checked={
-                  selectedAnswers[questions[currentQuestion].id] === option
-                }
+                  selectedAnswers[questions[currentQuestion].id] === option.name
+                } // Ensure this is comparing the same thing
                 onChange={() =>
-                  handleOptionChange(questions[currentQuestion].id, option)
-                }
+                  handleOptionChange(questions[currentQuestion].id, option.name)
+                } // Changed to `option.name`
                 className="mr-2"
               />
-              {option}
+              {option.name}
             </label>
           ))}
         </div>

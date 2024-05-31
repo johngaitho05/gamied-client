@@ -36,12 +36,8 @@ const Header = () => {
 
   const items = [
     {
-      key: "1",
-      label: <Link to={"/profile"}>Jane Doe</Link>,
-    },
-    {
       key: "2",
-      label: <Link to={"/profile"}>Dashboard</Link>,
+      label: <Link to={"/profile"}>Profile</Link>,
     },
     {
       key: "3",

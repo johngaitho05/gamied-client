@@ -18,8 +18,8 @@ const ExamCard = ({ exam, onClick }) => {
     }
   };
 
-  const getStatusIcon = (status) => {
-    switch (status) {
+  const getStatusIcon = (comment) => {
+    switch (comment.toLowerCase()) {
       case "failed":
         return <FaTimesCircle className="text-white" />;
       case "passed":
@@ -31,34 +31,47 @@ const ExamCard = ({ exam, onClick }) => {
     }
   };
 
+  const formatTime = (timeAllowed) => {
+    const hours = Math.floor(timeAllowed / 60);
+    const minutes = timeAllowed % 60;
+    return hours > 0
+      ? `${hours} hr${hours > 1 ? "s" : ""} ${
+          minutes > 0 ? `${minutes} min` : ""
+        }`
+      : `${minutes} min`;
+  };
+
   return (
     <Card
-      className={`border rounded-lg shadow-lg  mb-4 cursor-pointer p-0`}
+      className={`border rounded-lg shadow-lg mb-4 cursor-pointer p-0`}
       onClick={() => onClick(exam)}
       cover={
         <img
-          src={exam.image}
+          src={exam.thumbnail}
           alt={exam.title}
-          className="w-full h-48 object-cover  mb-4"
+          className="w-full h-48 object-cover mb-4"
         />
       }
       hoverable
     >
-      <h3 className="text-lg font-semibold mb-2 ">{exam?.title}</h3>
+      <h3 className="text-lg font-semibold mb-2">{exam?.title}</h3>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span>
-            <BsClockFill className="text-gray-500" />{" "}
+            <BsClockFill className="text-gray-500" />
           </span>
-          <p className="text-sm text-gray-600">Time: {exam?.time}</p>
+          <p className="text-sm text-gray-600">
+            {formatTime(exam?.time_allowed)}
+          </p>
         </div>
         <button
-          className={`flex p-1 px-2 text-white items-center gap-2 border rounded-[20px] shadow-lg  cursor-pointer ${getStatusStyle(
-            exam.status
+          className={`flex p-1 px-2 text-white items-center gap-2 border rounded-[20px] shadow-lg cursor-pointer ${getStatusStyle(
+            exam.result.comment.toLowerCase()
           )}`}
         >
-          {getStatusIcon(exam.status)}
-          <span>{exam.status}</span>
+          {getStatusIcon(exam?.result?.comment)}
+
+          <span>{exam?.result?.comment}</span>
         </button>
       </div>
     </Card>
