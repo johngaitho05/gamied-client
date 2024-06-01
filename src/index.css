@@ -5,3 +5,72 @@
 body {
   background-color: #eef0f8;
 }
+
+.background-pattern::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: #f9f9f9;
+  clip-path: circle(50% at 0 100%);
+}
+
+.background-pattern::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: #f9f9f9;
+  clip-path: circle(50% at 0 100%);
+}
+
+.wave-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 400px;
+  background: linear-gradient(to left, #cd5be4, #aa3bb4);
+  clip-path: ellipse(70% 100% at 100% 0);
+  z-index: -1;
+}
+
+.form-container {
+  position: relative;
+}
+
+/* Styling for the dot */
+.dot {
+  position: absolute;
+  right: -80%;
+  top: 30%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 150px;
+  background-color: #fdd835;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.dot2 {
+  position: absolute;
+  right: -80%;
+  top: 70%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: hsl(214, 62%, 41%);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .dot,
+  .dot2 {
+    display: none;
+  }
+}

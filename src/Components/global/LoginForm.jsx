@@ -1,83 +1,124 @@
-import React, {useEffect, useState} from 'react';
-
+import React, { useEffect, useState } from "react";
 import {
   useGetTokenMutation,
   useGetUserDetailsQuery,
-} from "../../redux/apis/apiSlice.js";
-import {Alert, Button, Form, Input, Spin} from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
-import {useNavigate} from "react-router-dom";
+} from "../../redux/apis/apiSlice";
+import { Alert, Button, Form, Input, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [getToken, { isLoading }] = useGetTokenMutation()
+  const [getToken, { isLoading }] = useGetTokenMutation();
   const [token, setToken] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const { data, refetch: refetchUserDetails } = useGetUserDetailsQuery(null, {
-    skip: !token, // Skip the query if the token is not yet available
+    skip: !token,
   });
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const [form] = Form.useForm();
 
   useEffect(() => {
     if (token) {
-      // Refetch user details when token is set
       const fetchUserDetails = async () => {
         try {
           const userData = await refetchUserDetails();
           return userData.data;
         } catch (err) {
-          console.error('Failed to fetch user details:', err);
+          console.error("Failed to fetch user details:", err);
         }
       };
-      fetchUserDetails().then(userData => setUserDetails(userData));
+      fetchUserDetails().then((userData) => setUserDetails(userData));
     }
   }, [token, refetchUserDetails]);
 
   useEffect(() => {
     if (userDetails) {
-      localStorage.setItem('user', JSON.stringify(userDetails));
-      navigate('/')
+      localStorage.setItem("user", JSON.stringify(userDetails));
+      navigate("/");
     }
   }, [userDetails]);
 
   const handleSubmit = async (formData) => {
-    setError("")
+    setError("");
     await getToken(formData).then(async function (token_res) {
       if (!token_res?.data) {
-        setError(token_res?.error?.data?.error || "Something went wrong!")
+        setError(token_res?.error?.data?.error || "Something went wrong!");
       } else {
-        localStorage.setItem('gamiedTokens', JSON.stringify(token_res.data))
-        setToken(token_res.data.access)
+        localStorage.setItem("gamiedTokens", JSON.stringify(token_res.data));
+        setToken(token_res.data.access);
       }
-    })
+    });
   };
+
   return (
-    <div className=" h-full px-4 w-full lg:w-[45%] flex flex-col items-center ">
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
-        <Form.Item name="email" label="Email"  rules={[{
-          required: true,
-          type: "email",
-          message: 'Please enter a valid email'
-        }]}>
-          <Input placeholder="Your email" className="w-full h-[40px]"/>
-        </Form.Item>
-        <Form.Item name="password" label="Password"
-                   rules={[{
-                     required: true,
-                     message: 'Please input your password'
-                   }]} hasFeedback>
-          <Input.Password className="w-full h-[40px]"/>
-        </Form.Item>
-        <Form.Item className="mb-2">
-          <Button type="primary" htmlType="submit"
-                  className="w-full bg-black text-center h-[40px] hover:bg-gray-950"
-                  disabled={isLoading}>
-            {isLoading ? <Spin indicator={<LoadingOutlined style={{fontSize: 24}} spin/>}/> : 'Submit'}
-          </Button>
-        </Form.Item>
-        {error && <Alert className="my-2" message={error} type="error" />}
-      </Form>
+    <div className="background-pattern min-h-screen flex flex-col items-center justify-center relative">
+      <div className="absolute top-0 left-0 right-0 h-24 flex justify-between items-center px-6 max-w-7xl mx-auto ">
+        <div className="font-bold text-2xl cursor-pointer  gap-1 ">
+          <img
+            src={logo}
+            alt="EventPulse"
+            className="w-[5rem] h-[5rem] object-cover"
+          />
+        </div>
+      </div>
+      <div className="wave-pattern"></div>
+      <div className="p-8 rounded-lg  z-10 mt-32 max-w-md w-full form-container">
+        <div className="dot"></div>
+        <div className="dot2"></div>
+        <h2 className="text-3xl font-extrabold text-center text-gray-900">
+          Login
+        </h2>
+        <p className="text-center text-sm text-gray-600">
+          Welcome back! Login to access GamiEd.
+        </p>
+        <Form
+          layout="vertical"
+          form={form}
+          onFinish={handleSubmit}
+          className="mt-8 space-y-6"
+        >
+          <Form.Item
+            name="username"
+            label="Username"
+            rules={[{ required: true, message: "Please enter your username" }]}
+          >
+            <Input
+              placeholder="Username"
+              className="w-full h-12 px-3 border border-gray-300 rounded-md"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[{ required: true, message: "Please input your password" }]}
+            hasFeedback
+          >
+            <Input.Password
+              placeholder="Password"
+              className="w-full h-12 px-3 border border-gray-300 rounded-md"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              // type="primary"
+              htmlType="submit"
+              className="w-full h-12 bg-gradient-to-r from-pink-500 to-orange-500 text-white hover:from-pink-600 hover:bg-orange-600 rounded-md flex justify-center items-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Spin
+                  indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                />
+              ) : (
+                "CONTINUE"
+              )}
+            </Button>
+          </Form.Item>
+          {error && <Alert message={error} type="error" className="my-2" />}
+        </Form>
+      </div>
     </div>
   );
 };
