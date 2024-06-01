@@ -25,7 +25,7 @@ const TopicCard = ({ singleLesson }) => {
         }
         expandIconPosition="right"
         accordion={true} // Ensure only one panel is open at a time
-        activeKey={activeKey}
+        // activeKey={activeKey}
         onChange={handlePanelChange}
       >
         <Panel

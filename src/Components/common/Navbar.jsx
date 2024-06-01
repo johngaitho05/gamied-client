@@ -6,11 +6,12 @@ import { links } from "../../data";
 import { Button, Dropdown, Select, Avatar } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Image from "../../assets/profile2.jpg";
+import {getUser, parseMedia} from "../../helpers/utils.js";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const user = "Jane";
+  const [user, setUser] = useState(getUser())
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    window.location('/')
   };
 
   const items = [
@@ -103,7 +105,7 @@ const Header = () => {
               >
                 <div className="border-none text-white text-md flex gap-2">
                   <img
-                    src={Image}
+                    src={parseMedia(user.avatar) || 'https://bit.ly/3Rbhgml'}
                     alt=""
                     className="h-[2rem ] w-[2rem] rounded-full"
                   />

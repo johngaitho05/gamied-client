@@ -64,7 +64,6 @@ export const courses = [
 export const SingleCourse = [
   {
     title: "Accounting Basics",
-    lessons: 7,
     progress: 25,
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
