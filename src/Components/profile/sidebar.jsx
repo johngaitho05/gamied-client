@@ -7,7 +7,6 @@ import { Avatar } from "@mui/material";
 
 const Sidebar = ({ sidebar, toggleSidebar }) => {
   const user = "";
-  console.log(user);
   const [activeIndex, setActiveIndex] = useState(null);
 
   // function to toggle active index

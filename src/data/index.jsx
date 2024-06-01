@@ -10,7 +10,7 @@ export const links = [
   },
 ];
 
-export const courses = [
+export const sampleCourses = [
   {
     title: "Accounting Basics",
     lessons: 7,

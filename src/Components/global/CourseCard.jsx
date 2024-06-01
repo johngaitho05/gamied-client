@@ -4,7 +4,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "antd";
 
-const CourseCard = ({ name, lessons, completion, image }) => {
+const CourseCard = ({ name, lessons_count, completion, image }) => {
   const navigate = useNavigate();
   return (
     <Card
@@ -19,7 +19,7 @@ const CourseCard = ({ name, lessons, completion, image }) => {
         <h2 className="font-semibold text-lg mb-2">{name}</h2>
         <div className="flex  items-center justify-between mt-4">
           {" "}
-          <p className="text-gray-600 mb-4">{lessons} Lessons</p>
+          <p className="text-gray-600 mb-4">{lessons_count} Lessons</p>
           <div className="flex items-center justify-between">
             <CircularProgressbar
               value={completion}

@@ -23,9 +23,9 @@ const TopicCard = ({ singleLesson }) => {
         expandIcon={({ isActive }) =>
           isActive ? <FaChevronUp /> : <FaChevronRight />
         }
-        expandIconPosition="right"
+        expandIconPosition="end"
         accordion={true} // Ensure only one panel is open at a time
-        // activeKey={activeKey}
+        activeKey={activeKey}
         onChange={handlePanelChange}
       >
         <Panel

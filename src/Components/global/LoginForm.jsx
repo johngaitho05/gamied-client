@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {
   useGetTokenMutation,
   useGetUserDetailsQuery,
-} from "../redux/apis/apiSlice";
+} from "../../redux/apis/apiSlice.js";
 import {Alert, Button, Form, Input, Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
