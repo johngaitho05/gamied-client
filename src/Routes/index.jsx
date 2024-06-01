@@ -26,14 +26,14 @@ const Index = () => {
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<Login />} />
         </Route>
-        {/* <Route element={<PrivateRoutes/>}> */}
-        <Route path="/" element={<CoursesPage />} />
-        <Route path="/course/:id" element={<CoursesDetailPage />} />
-        <Route path="/exams" element={<ExamsPage />} />
-        {/* <Route path="/exams/:id" element={<AssessmentPage />} /> */}
-        <Route path="/exams/assessment/:id" element={<ExamsDetailPage />} />
-        <Route path="/profile" element={<Profile />} />
-        {/* </Route> */}
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<CoursesPage />} />
+          <Route path="/course/:id" element={<CoursesDetailPage />} />
+          <Route path="/exams" element={<ExamsPage />} />
+          {/* <Route path="/exams/:id" element={<AssessmentPage />} /> */}
+          <Route path="/exams/assessment/:id" element={<ExamsDetailPage />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
     </div>
   );
