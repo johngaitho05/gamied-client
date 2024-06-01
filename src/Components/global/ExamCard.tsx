@@ -6,7 +6,6 @@ import { BsClockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const ExamCard = ({ exam, handleExamClick }) => {
-  console.log(exam);
   const getStatusStyle = (status) => {
     switch (status) {
       case "failed":

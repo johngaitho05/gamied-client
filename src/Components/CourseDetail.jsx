@@ -1,13 +1,17 @@
-import React from "react";
-import TopicCard from "../Components/global/TopicCard";
+import React, {useEffect} from "react";
+import LessonAccordion from "./global/LessonAccordion.jsx";
+import {
+  useGetCourseDetailsQuery,
+} from "../redux/apis/apiSlice.js";
 
-const CourseDetail = ({ courseDetail, singleLesson }) => {
+const CourseDetail = ({courseId}) => {
+  const {data: course, isFetching} = useGetCourseDetailsQuery(courseId)
+
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">{courseDetail?.title}</h1>
-      {courseDetail?.lessons?.map((topic, index) => (
-        <TopicCard key={index} singleLesson={singleLesson} />
-      ))}
+      <h1 className="text-2xl font-bold mb-4">{course?.title}</h1>
+      {course ? <LessonAccordion course={course} />: ''}
     </div>
   );
 };

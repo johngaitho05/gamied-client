@@ -41,7 +41,7 @@ export const apiSlice = createApi({
             providesTags: ['courseDetails'],
         }),
         getLessonDetails: builder.query({
-            query: (courseId, lessonId) => createRequest(`/courses/${courseId}/lessons/${lessonId}`),
+            query: (data) => createRequest(`/courses/${data.courseId}/lessons/${data.lessonId}`),
             providesTags: ['lessonDetails'],
         }),
         getAssessments: builder.query({

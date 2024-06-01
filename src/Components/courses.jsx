@@ -16,6 +16,7 @@ const Courses = () => {
         {courses?.map((course, index) => (
           <CourseCard
             key={index}
+            id={course.id}
             name={course?.title}
             lessons_count={course?.lessons_count}
             completion={course?.progress}

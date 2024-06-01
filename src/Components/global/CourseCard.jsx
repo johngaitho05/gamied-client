@@ -4,12 +4,12 @@ import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "antd";
 
-const CourseCard = ({ name, lessons_count, completion, image }) => {
+const CourseCard = ({ id, name, lessons_count, completion, image }) => {
   const navigate = useNavigate();
   return (
     <Card
       className="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white p-0"
-      onClick={() => navigate(`course/${1}`)}
+      onClick={() => navigate(`course/${id}`)}
       cover={
         <img className="w-full h-48 object-cover" src={image} alt={name} />
       }
