@@ -53,7 +53,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="background-pattern min-h-screen flex flex-col items-center justify-center relative">
+    <div className="background-pattern min-h-screen flex flex-col items-center justify-center relative overflow-hidden ">
       <div className="absolute top-0 left-0 right-0 h-24 flex justify-between items-center px-6 max-w-7xl mx-auto ">
         <div className="font-bold text-2xl cursor-pointer  gap-1 ">
           <img
@@ -82,12 +82,12 @@ const LoginForm = () => {
           className="mt-8 space-y-6"
         >
           <Form.Item
-            name="username"
-            label="Username"
+            name="email"
+            label="email"
             rules={[{ required: true, message: "Please enter your username" }]}
           >
             <Input
-              placeholder="Username"
+              placeholder="Email"
               className="w-full h-12 px-3 border border-gray-300 rounded-md"
             />
           </Form.Item>
