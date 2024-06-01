@@ -1,4 +1,5 @@
 import React from "react";
+import { Row, Col } from "antd";
 import Layout from "../Components/Layout";
 import Courses from "../Components/profile/courses";
 import Sidebar from "../Components/profile/sidebar";
@@ -6,10 +7,15 @@ import Sidebar from "../Components/profile/sidebar";
 const ProfilePage = () => {
   return (
     <Layout>
-      <div className="flex gap-4 flex-wrap lg:flex-nowrap pb-10">
-        <Sidebar className="md:col-span-1" />
-        <Courses className="md:col-span-2" />
-      </div>
+      <Row gutter={[16, 16]} className="pb-10">
+        <Col xs={24} sm={24} md={8} lg={7}>
+          <Sidebar />
+        </Col>
+
+        <Col xs={24} sm={24} md={16} lg={17}>
+          <Courses />
+        </Col>
+      </Row>
     </Layout>
   );
 };

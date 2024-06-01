@@ -20,26 +20,26 @@ const Sidebar = ({ sidebar, toggleSidebar }) => {
 
   return (
     <div
-      className={` pt-5  top-0 left-0    text-text   h-screen   transform duration-300  shadow-lg border-r border-t  flex flex-col  ${
+      className={`pt-5 top-0 left-0 text-text h-screen transform duration-300 border-r border-gray-300 flex flex-col ${
         activeIndex !== null ? "overflow-y-scroll custom-scrollbar" : ""
       } ${sidebar ? "w-[19rem]" : ""}`}
     >
       {/* user profile */}
-      <div className="flex flex-col items-center xl:gap-5 justify-between xl:justify-start  border-b  pb-5 px-10">
-        <span className="bg-gray-200 rounded-[50%] ">
+      <div className="flex flex-col items-center xl:gap-5 justify-between xl:justify-start pb-5 px-10">
+        <span className="bg-gray-200 rounded-[50%]">
           <Avatar src={userImage} style={{ height: "100px", width: "100px" }} />
           {/* <img src={user} alt="" className="w-14 h-14 object-fit" /> */}
         </span>
-        <span className="">
-          <p className="flex gap-2 ">
+        <span>
+          <p className="flex gap-2">
             <span className="text-cta">Name:</span>
             <span>Jane Doe</span>
           </p>
-          <p className="flex gap-2 ">
+          <p className="flex gap-2">
             <span className="text-cta">Email:</span>
             <span>jane@gmail.com</span>
           </p>
-          <p className="flex gap-2 ">
+          <p className="flex gap-2">
             <span className="text-cta">Rank:</span>
             <span>(8540XP)</span>
           </p>
@@ -58,22 +58,24 @@ const Sidebar = ({ sidebar, toggleSidebar }) => {
         {navItems.map((item, index) => (
           <li
             key={index}
-            className="flex justify-between flex-col gap-2 transform duration-300"
+            className={`flex justify-between flex-col gap-2 transform duration-300 ${
+              item.status == "received" ? "" : "opacity-30"
+            }`}
           >
             <Link
               to={item.link}
               onClick={() => toggleActiveIndex(index)}
               className="flex justify-between w-full"
             >
-              <span className="flex items-center gap-5">
+              <span className="flex items-center gap-5  w-full">
                 <div className="h-10 w-10 bg-blue rounded-full flex items-center justify-center">
                   <img
                     src={item?.Image}
                     alt=""
-                    className="h-8  w-8 rounded-full"
+                    className="h-8 w-8 rounded-full"
                   />
                 </div>
-                <p className="flex gap-2 border p-2 text-sm border-blue rounded line-clamp-1 w-[13rem]">
+                <p className="flex gap-2 border p-2 text-sm border-blue rounded-lg line-clamp-1 w-[80%] ">
                   <span>{item.label}</span>
                   <span>{item.Points}</span>
                 </p>

@@ -29,21 +29,21 @@ const navItems = [
     label: "SuperHero",
     Image: SuperHero,
     Points: "5000-1990Xp",
-    status: "received",
+    status: "not received",
   },
 
   {
     label: "Expert",
     Image: Expert,
     Points: "0-1990Xp",
-    status: "received",
+    status: "not received",
   },
 
   {
     label: "Master",
     Image: Master,
     Points: "0-1990Xp",
-    status: "received",
+    status: "not received",
   },
 ];
 
