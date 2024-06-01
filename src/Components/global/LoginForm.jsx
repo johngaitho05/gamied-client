@@ -67,9 +67,11 @@ const LoginForm = () => {
       <div className="p-8 rounded-lg  z-10 mt-32 max-w-md w-full form-container">
         <div className="dot"></div>
         <div className="dot2"></div>
-        <h2 className="text-3xl font-extrabold text-center text-gray-900">
-          Login
-        </h2>
+        <div className="flex justify-center mb-4">
+          <h2 className="text-3xl font-extrabold text-center text-blue  w-fit gradient-border-bottom ">
+            Login
+          </h2>
+        </div>
         <p className="text-center text-sm text-gray-600">
           Welcome back! Login to access GamiEd.
         </p>

@@ -34,7 +34,7 @@ body {
   right: 0;
   width: 60%;
   height: 400px;
-  background: linear-gradient(to left, #cd5be4, #aa3bb4);
+  background: linear-gradient(to left, #a12591, #c2229f);
   clip-path: ellipse(70% 100% at 100% 0);
   z-index: -1;
 }
@@ -51,7 +51,7 @@ body {
   transform: translateY(-50%);
   width: 150px;
   height: 150px;
-  background-color: #fdd835;
+  background-color: rgb(255, 165, 0, 0.5);
   border-radius: 50%;
   z-index: 10;
 }
@@ -73,4 +73,24 @@ body {
   .dot2 {
     display: none;
   }
+}
+
+.gradient-border-bottom {
+  position: relative;
+  display: inline-block; /* Adjust display as needed for your layout */
+}
+
+.gradient-border-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px; /* Thickness of the border */
+  margin-top: 2px;
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    #f97316
+  ); /* Adjust gradient colors as needed */
 }
