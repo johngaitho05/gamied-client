@@ -8,36 +8,36 @@ import Master from "../../assets/master.png";
 const Levels = [
   {
     name: "Novice",
-    Image: Novice,
-    Points: "0-1999Xp",
+    image: Novice,
+    points: "0-1999XP",
   },
   {
     name: "Apprentice",
-    Image: Apprentice,
-    Points: "2000-4999Xp",
+    image: Apprentice,
+    points: "2000-4999XP",
   },
   {
     name: "Hero",
-    Image: Hero,
-    Points: "5000-9999Xp",
+    image: Hero,
+    points: "5000-9999XP",
   },
 
   {
     name: "SuperHero",
-    Image: SuperHero,
-    Points: "10000-19999Xp",
+    image: SuperHero,
+    points: "10000-19999XP",
   },
 
   {
     name: "Expert",
-    Image: Expert,
-    Points: "20000-49999Xp",
+    image: Expert,
+    points: "20000-49999XP",
   },
 
   {
     name: "Master",
-    Image: Master,
-    Points: "50000Xp and Above",
+    image: Master,
+    points: "50000XP and Above",
   },
 ];
 
