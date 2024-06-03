@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [getToken, { isLoading }] = useGetTokenMutation();
   const [token, setToken] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
-  const { data, refetch: refetchUserDetails } = useGetUserDetailsQuery(null, {
+  const { refetch: refetchUserDetails } = useGetUserDetailsQuery(null, {
     skip: !token,
   });
   const [error, setError] = useState("");
