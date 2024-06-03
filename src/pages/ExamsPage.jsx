@@ -1,7 +1,6 @@
 import React from "react";
-import Exams from "../Components/ExamsComponent";
-import Layout from "../Components/Layout";
-import Loading from "../Components/global/Loading";
+import Exams from "../Components/exams/Exams";
+import Layout from "../Components/global/Layout.jsx";
 
 const ExamPage = () => {
   return (

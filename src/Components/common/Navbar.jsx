@@ -3,9 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { AlignJustify, X, User } from "lucide-react";
 import { links } from "../../data";
-import { Button, Dropdown, Select, Avatar } from "antd";
+import { Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import Image from "../../assets/profile2.jpg";
 import {getUser, parseMedia} from "../../helpers/utils.js";
 
 const Header = () => {

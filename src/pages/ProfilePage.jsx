@@ -1,8 +1,8 @@
 import React from "react";
 import { Row, Col } from "antd";
-import Layout from "../Components/Layout";
-import Courses from "../Components/profile/courses";
-import Sidebar from "../Components/profile/sidebar";
+import Layout from "../Components/global/Layout.jsx";
+import Courses from "../Components/auth/Courses.jsx";
+import Sidebar from "../Components/auth/Sidebar.jsx";
 
 const ProfilePage = () => {
   return (

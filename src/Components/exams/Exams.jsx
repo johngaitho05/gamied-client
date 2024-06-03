@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ExamCard from "../Components/global/ExamCard";
-import ExamModal from "../Components/ExamModal";
-import { assessments } from "../data/index";
+import ExamCard from "./ExamCard.jsx";
+import ExamModal from "./ExamModal.jsx";
+import { assessments } from "../../data/index.jsx";
 import { useNavigate } from "react-router-dom";
 
-const Exam = () => {
+const Exams = () => {
   const [selectedExam, setSelectedExam] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -33,8 +33,7 @@ const Exam = () => {
           <ExamCard
             key={exam.id}
             exam={exam}
-            handleExamClick={handleExamClick}
-          />
+            handleExamClick={handleExamClick}/>
         ))}
       </div>
 
@@ -49,4 +48,4 @@ const Exam = () => {
   );
 };
 
-export default Exam;
+export default Exams;

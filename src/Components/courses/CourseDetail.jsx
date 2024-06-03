@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
-import LessonAccordion from "./global/LessonAccordion.jsx";
+import LessonAccordion from "../courses/LessonAccordion.jsx";
 import {
   useGetCourseDetailsQuery,
-} from "../redux/apis/apiSlice.js";
+} from "../../redux/apis/apiSlice.js";
 
 const CourseDetail = ({courseId}) => {
   const {data: course, isFetching} = useGetCourseDetailsQuery(courseId)

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import CourseCard from "./CoursesCard";
 import {useGetCoursesQuery} from "../../redux/apis/apiSlice.js";
-import coursesCard from "./CoursesCard";
 
 
 const Courses = () => {

@@ -1,12 +1,12 @@
 import React from "react";
-import ExamDetail from "../Components/ExamDetails";
-import Layout from "../Components/Layout";
+import ExamDetails from "../Components/exams/ExamDetails.jsx";
+import Layout from "../Components/global/Layout.jsx";
 
 const ExamDetailsPage = () => {
   return (
     <div>
       <Layout>
-        <ExamDetail />
+        <ExamDetails />
       </Layout>
     </div>
   );

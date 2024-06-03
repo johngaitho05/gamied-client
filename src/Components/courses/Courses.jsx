@@ -1,8 +1,8 @@
 import React from "react";
-import CourseCard from "./global/CourseCard";
+import CourseCard from "../courses/CourseCard";
 import {
   useGetCoursesQuery,
-} from "../redux/apis/apiSlice.js";
+} from "../../redux/apis/apiSlice.js";
 
 
 const Courses = () => {
