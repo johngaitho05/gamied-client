@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../Components/Layout";
-import Courses from "../Components/courses";
+import Layout from "../Components/global/Layout.jsx";
+import Courses from "../Components/courses/Courses.jsx";
 
 const CoursesPage = () => {
   return (

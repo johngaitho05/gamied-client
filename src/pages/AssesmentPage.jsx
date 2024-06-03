@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../Components/Layout";
-import AssessmentComponent from "../Components/SingleAssessment";
+import Layout from "../Components/global/Layout.jsx";
+import AssessmentComponent from "../Components/exams/SingleAssessment.jsx";
 
 const AssesmentPage = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import CoursesPage from "../pages/courses";
+import CoursesPage from "../pages/Courses.jsx";
 import CoursesDetailPage from "../pages/CourseDetail";
 import ExamsPage from "../pages/ExamsPage";
 import ExamsDetailPage from "../pages/ExamDetails";

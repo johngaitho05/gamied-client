@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { singleAssessment } from "../data/index"; // Import the questions
+import { singleAssessment } from "../../data/index.jsx"; // Import the questions
 
-const Exam = () => {
+const ExamDetails = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
@@ -121,4 +121,4 @@ const Exam = () => {
   );
 };
 
-export default Exam;
+export default ExamDetails;

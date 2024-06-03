@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import AssessmentCard from "./global/AssesmentCard";
-import { singleAssessment } from "../data/index";
-import ExamModal from "../Components/ExamModal";
+import AssessmentCard from "./AssesmentCard.jsx";
+import { singleAssessment } from "../../data/index.jsx";
+import ExamModal from "./ExamModal.jsx";
 
 import { useNavigate } from "react-router-dom";
 
