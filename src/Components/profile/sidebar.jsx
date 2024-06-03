@@ -1,19 +1,14 @@
-import userImage from "../../assets/profile2.jpg";
-import { useState } from "react";
 import Levels from "./Levels.jsx";
 import { Avatar } from "@mui/material";
 import {getUser, parseMedia} from "../../helpers/utils.js";
 
-const Sidebar = ({ sidebar, toggleSidebar }) => {
+const Sidebar = () => {
   const user = getUser();
-  const [activeIndex, setActiveIndex] = useState(null);
   const levelIndex = Levels.findIndex(level => level.name === user.rank);
 
   return (
     <div
-      className={`pt-5 top-0 left-0 text-text h-screen transform duration-300 border-r border-gray-300 flex flex-col ${
-        activeIndex !== null ? "overflow-y-scroll" : ""
-      } ${sidebar ? "w-[19rem]" : ""}`}>
+      className={`pt-5 top-0 left-0 text-text h-screen transform duration-300 border-r border-gray-300 flex flex-col`}>
       <div className="flex flex-col items-center xl:gap-5 justify-between xl:justify-start pb-5 px-10">
         <span className="bg-gray-200 rounded-[50%]">
           <Avatar src={parseMedia(user?.avatar)} style={{ height: "100px", width: "100px" }} />

@@ -1,15 +1,12 @@
 import React from "react";
-import Layout from "./Layout";
 import Courses from "./courses";
+import Sidebar from "./sidebar.jsx";
 
 const Profile = () => {
   return (
     <div>
-      <Layout>
-        <div>
-          <Courses />
-        </div>
-      </Layout>
+      <Sidebar/>
+      <Courses />
     </div>
   );
 };
