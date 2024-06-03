@@ -19,7 +19,6 @@ const Exam = () => {
   };
 
   const handleProceed = (id) => {
-    console.log("Proceeding with exam:", selectedExam);
     navigate(`/exams/assessment/${id}`);
 
     setShowModal(false);

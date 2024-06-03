@@ -1,22 +1,15 @@
 import userImage from "../../assets/profile2.jpg";
 import { useState } from "react";
 import { ChevronDown, ArrowLeft } from "lucide-react";
-import navItems from "./NavLinks";
+import Levels from "./Levels.jsx";
 import { Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
+import {getUser, parseMedia} from "../../helpers/utils.js";
 
 const Sidebar = ({ sidebar, toggleSidebar }) => {
-  const user = "";
+  const user = getUser();
   const [activeIndex, setActiveIndex] = useState(null);
-
-  // function to toggle active index
-  const toggleActiveIndex = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
-  };
+  const levelIndex = Levels.findIndex(level => level.name === user.rank);
 
   return (
     <div
@@ -27,21 +20,20 @@ const Sidebar = ({ sidebar, toggleSidebar }) => {
       {/* user profile */}
       <div className="flex flex-col items-center xl:gap-5 justify-between xl:justify-start pb-5 px-10">
         <span className="bg-gray-200 rounded-[50%]">
-          <Avatar src={userImage} style={{ height: "100px", width: "100px" }} />
-          {/* <img src={user} alt="" className="w-14 h-14 object-fit" /> */}
+          <Avatar src={parseMedia(user?.avatar)} style={{ height: "100px", width: "100px" }} />
         </span>
         <span>
           <p className="flex gap-2">
             <span className="text-cta">Name:</span>
-            <span>Jane Doe</span>
+            <span>{user?.name}</span>
           </p>
           <p className="flex gap-2">
             <span className="text-cta">Email:</span>
-            <span>jane@gmail.com</span>
+            <span>{user?.email}</span>
           </p>
           <p className="flex gap-2">
             <span className="text-cta">Rank:</span>
-            <span>(8540XP)</span>
+            <span>({user.points}XP)</span>
           </p>
         </span>
         <span
@@ -51,46 +43,30 @@ const Sidebar = ({ sidebar, toggleSidebar }) => {
           <ArrowLeft size={24} strokeWidth={2} />
         </span>
       </div>
-      {/* overview */}
-      <div className="flex justify-between mt-5 items-center text-center text-sm"></div>
 
       <ul className="mt-8 flex w-full flex-col gap-6 text-base pl-5 px-5">
-        {navItems.map((item, index) => (
+        {Levels.map((level, index) => (
           <li
             key={index}
             className={`flex justify-between flex-col gap-2 transform duration-300 ${
-              item.status == "received" ? "" : "opacity-30"
+              index <= levelIndex ? "" : "opacity-30"
             }`}
           >
-            <Link
-              to={item.link}
-              onClick={() => toggleActiveIndex(index)}
-              className="flex justify-between w-full"
-            >
+            <div className="flex justify-between w-full">
               <span className="flex items-center gap-5  w-full">
                 <div className="h-10 w-10 bg-blue rounded-full flex items-center justify-center">
                   <img
-                    src={item?.Image}
+                    src={level.Image}
                     alt=""
                     className="h-8 w-8 rounded-full"
                   />
                 </div>
                 <p className="flex gap-2 border p-2 text-sm border-blue rounded-lg line-clamp-1 w-[80%] ">
-                  <span>{item.label}</span>
-                  <span>{item.Points}</span>
+                  <span>{level.name}</span>
+                  <span>{level.Points}</span>
                 </p>
               </span>
-              {item.children && (
-                <ChevronDown
-                  size={20}
-                  className={`${
-                    activeIndex === index
-                      ? "transform rotate-180 duration-300"
-                      : ""
-                  }`}
-                />
-              )}
-            </Link>
+            </div>
           </li>
         ))}
       </ul>
