@@ -7,7 +7,6 @@ const ExamPage = () => {
     <div>
       <Layout>
         <Exams />
-        <Loading />
       </Layout>
     </div>
   );
