@@ -31,7 +31,7 @@ const Index = () => {
           <Route path="/course/:id" element={<CoursesDetailPage />} />
           <Route path="/exams" element={<ExamsPage />} />
           {/* <Route path="/exams/:id" element={<AssessmentPage />} /> */}
-          <Route path="/exams/assessment/:id" element={<ExamsDetailPage />} />
+          <Route path="/exams/:id" element={<ExamsDetailPage />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
