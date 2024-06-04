@@ -1,12 +1,10 @@
 import React from "react";
 import CourseCard from "../courses/CourseCard";
-import {
-  useGetCoursesQuery,
-} from "../../redux/apis/apiSlice.js";
-
+import Loader from "../global/Loading.jsx";
+import { useGetCoursesQuery } from "../../redux/apis/apiSlice.js";
 
 const Courses = () => {
-  const { data:courses, isFetching } = useGetCoursesQuery()
+  const { data: courses, isFetching } = useGetCoursesQuery();
 
   return (
     <div className="mt-32 min-h-screen ">
@@ -24,6 +22,8 @@ const Courses = () => {
           />
         ))}
       </div>
+
+      {isFetching && <Loader />}
     </div>
   );
 };

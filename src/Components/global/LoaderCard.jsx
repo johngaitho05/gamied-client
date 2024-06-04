@@ -8,7 +8,7 @@ const LoaderCard = () => {
       hoverable
       cover={
         <Skeleton.Image
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover animate-pulse"
           style={{ width: "300px", height: "180px" }}
         />
       }
