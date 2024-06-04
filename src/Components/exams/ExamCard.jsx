@@ -83,7 +83,7 @@ const ExamCard = ({ exam, handleExamClick }) => {
 
 ExamCard.propTypes = {
   exam: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
+  handleExamClick: PropTypes.func.isRequired,
 };
 
 export default ExamCard;

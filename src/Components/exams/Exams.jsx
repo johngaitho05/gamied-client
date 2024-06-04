@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import ExamCard from "./ExamCard.jsx";
 import ExamModal from "./ExamModal.jsx";
-import { assessments } from "../../data/index.jsx";
 import { useNavigate } from "react-router-dom";
+import {useGetAssessmentsQuery} from '../../redux/apis/apiSlice.js'
 
 const Exams = () => {
   const [selectedExam, setSelectedExam] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const {data: exams, isFetching} = useGetAssessmentsQuery()
 
   const handleExamClick = (exam) => {
     setSelectedExam(exam);
@@ -19,7 +20,7 @@ const Exams = () => {
   };
 
   const handleProceed = (id) => {
-    navigate(`/exams/assessment/${id}`);
+    navigate(`/exams/${id}`);
 
     setShowModal(false);
   };
@@ -29,7 +30,7 @@ const Exams = () => {
       <h1 className="text-2xl font-bold mb-4">Exams</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {assessments.map((exam) => (
+        {exams?.map((exam) => (
           <ExamCard
             key={exam.id}
             exam={exam}
@@ -41,7 +42,7 @@ const Exams = () => {
         <ExamModal
           exam={selectedExam}
           onClose={handleCloseModal}
-          onProceed={() => handleProceed(1)}
+          onProceed={() => handleProceed(selectedExam.id)}
         />
       )}
     </div>

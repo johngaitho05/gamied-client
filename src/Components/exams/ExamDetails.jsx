@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { singleAssessment } from "../../data/index.jsx"; // Import the questions
+import { useGetAssessmentDetailsQuery } from '../../redux/apis/apiSlice.js'
 
-const ExamDetails = () => {
+const ExamDetails = ({examId}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [questions, setQuestions] = useState([])
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
-  const questions = singleAssessment?.questions;
+  const {data: exam, isFetching} = useGetAssessmentDetailsQuery(examId)
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -34,12 +35,19 @@ const ExamDetails = () => {
     };
   }, []);
 
-  const handleOptionChange = (questionId, option) => {
-    setSelectedAnswers({ ...selectedAnswers, [questionId]: option });
+  useEffect(() => {
+    if(exam) {
+      console.log("exam", exam)
+      setQuestions(exam.questions)
+    }
+  }, [exam]);
+
+  const handleOptionChange = (questionId, answer) => {
+    setSelectedAnswers({ ...selectedAnswers, [questionId]: answer });
   };
 
   const handleNext = () => {
-    setCurrentQuestion((prev) => Math.min(prev + 1, questions.length - 1));
+    setCurrentQuestion((prev) => Math.min(prev + 1, questions?.length - 1));
   };
 
   const handlePrevious = () => {
@@ -59,34 +67,35 @@ const ExamDetails = () => {
   };
 
   return (
+
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">React Exam</h1>
+      <h1 className="text-2xl font-bold mb-4">{exam?.title}</h1>
       <div className="flex justify-between mb-4">
         <span>
-          Question {currentQuestion + 1} of {questions.length}
+          Question {currentQuestion + 1} of {questions?.length}
         </span>
         <span>Time Left: {formatTime(timeLeft)}</span>
       </div>
       <div className="border p-4 rounded-lg">
         <h2 className="text-lg font-semibold mb-4">
-          {questions[currentQuestion].name}
+          {questions && questions[currentQuestion]?.name}
         </h2>
         <div>
-          {questions[currentQuestion].answers?.map((option, index) => (
+          {questions && questions[currentQuestion]?.answers?.map((answer, index) => (
             <label key={index} className="block mb-2">
               <input
                 type="radio"
                 name={`question-${currentQuestion}`}
-                value={option.name} // Changed from `option` to `option.name`
+                value={answer.name} // Changed from `answer` to `answer.name`
                 checked={
-                  selectedAnswers[questions[currentQuestion].id] === option.name
+                  selectedAnswers[questions[currentQuestion].id] === answer.name
                 } // Ensure this is comparing the same thing
                 onChange={() =>
-                  handleOptionChange(questions[currentQuestion].id, option.name)
-                } // Changed to `option.name`
+                  handleOptionChange(questions[currentQuestion].id, answer.name)
+                } // Changed to `answer.name`
                 className="mr-2"
               />
-              {option.name}
+              {answer.name}
             </label>
           ))}
         </div>
@@ -100,13 +109,13 @@ const ExamDetails = () => {
           </button>
           <button
             onClick={handleNext}
-            disabled={currentQuestion === questions.length - 1}
+            disabled={currentQuestion === questions?.length - 1}
             className="bg-blue hover:bg-blue-500 text-white px-4 py-2 rounded"
           >
             Next
           </button>
         </div>
-        {currentQuestion === questions.length - 1 && (
+        {currentQuestion === questions?.length - 1 && (
           <div className="flex justify-end mt-4">
             <button
               onClick={handleSubmit}
