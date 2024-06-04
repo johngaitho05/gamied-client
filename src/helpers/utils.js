@@ -1,5 +1,5 @@
 
-export const baseUrl = 'http://localhost:8000';
+export const baseUrl = 'https://gamied.tech';
 
 export const getUser = ()=> {
     let user =  localStorage.getItem('user')
