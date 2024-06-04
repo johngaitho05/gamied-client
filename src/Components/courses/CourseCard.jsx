@@ -26,7 +26,7 @@ const CourseCard = ({ id, name, lessons_count, completion, image }) => {
               text={`${completion}%`}
               styles={buildStyles({
                 textSize: "24px",
-                pathColor: `rgba(255, 165, 0, ${completion / 100})`,
+                pathColor: `rgba(0, 123, 255, ${completion / 100})`,
                 textColor: "#007bff",
                 trailColor: "#d6d6d6",
               })}

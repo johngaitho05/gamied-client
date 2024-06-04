@@ -53,9 +53,9 @@ export const apiSlice = createApi({
             providesTags: ['assessmentList'],
         }),
         submitAssessment: builder.mutation({
-            query: (assessmentId, body) => createRequest(`/assessments/${assessmentId}`, 'POST', body, true),
+            query: (data) => createRequest(`/assessments/${data.assessmentId}/submit`, 'POST', data.body, true),
             async onQueryStarted(body, { dispatch }) {
-                dispatch(apiSlice.util.invalidateTags(['assessmentList', 'assessmentDetails', 'userDetails']));
+                dispatch(apiSlice.util.invalidateTags(['lessonDetails']));
             },
         }),
     }),

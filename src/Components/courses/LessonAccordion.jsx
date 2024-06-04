@@ -5,15 +5,21 @@ import {
   FaExclamationCircle,
 } from "react-icons/fa";
 import {Collapse, Spin} from "antd";
-import {useGetLessonDetailsQuery} from "../../redux/apis/apiSlice.js";
+import {useGetLessonDetailsQuery, useSubmitAssessmentMutation} from "../../redux/apis/apiSlice.js";
 
 const LessonAccordion = ({ course }) => {
   const lessons = course.lessons
   const courseId = course.id
-  const [activeLesson, setActivePanel] = useState(null);
+  const [activeLesson, setActiveLesson] = useState(null);
+  const [lessonCompleted, setLessonCompleted] = useState(false)
+  const [submittedAnswers, setSubmittedAnswers] = useState({})
+  const [selectedAnswers, setSelectedAnswers] = useState({})
   const {data, refetch: refetchLessonDetails} = useGetLessonDetailsQuery({courseId, lessonId:activeLesson}, {skip: !activeLesson})
   const [lessonDetails, setLessonDetails] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null)
+  const [submitted, setSubmitted] = useState(false)
+  const [submitAssessment, { isSubmitting }] = useSubmitAssessmentMutation();
 
 
   useEffect(() => {
@@ -29,7 +35,6 @@ const LessonAccordion = ({ course }) => {
         }
       };
       fetchLessonDetails().then(data => {
-        console.log("data", data)
         setLessonDetails((prevDetails) => ({
           ...prevDetails,
           [activeLesson]: data,
@@ -41,16 +46,73 @@ const LessonAccordion = ({ course }) => {
   const handlePanelChange = (key) => {
     key = parseInt(key)
     if (key) {
-      setActivePanel(key);
+      setActiveLesson(key);
     } else {
-      setActivePanel(null);
+      setActiveLesson(null);
     }
   };
+
+  const handleAnswerChange = (ev) => {
+    let values = ev.target.value.split("_").map((v)=> parseInt(v))
+    let lessonAnswers = selectedAnswers[activeLesson] || {}
+    lessonAnswers[values[0]] = values[1]
+    setSelectedAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [activeLesson]: lessonAnswers,
+    }));
+  }
+
+  const handleSubmit = () => {
+    setError(null)
+    let lesson = lessonDetails[activeLesson]
+    let count = Object.keys(selectedAnswers[activeLesson]).length
+    if(count !== lesson.assessment.questions.length){
+      setError('All questions must be answered!')
+      return
+    }
+    let data = {
+      assessmentId: lesson.assessment.id,
+      body: {
+        answers: selectedAnswers[activeLesson]
+      }
+    }
+    submitAssessment(data).then((res)=>{
+      if (!res?.data) setError(res?.error?.data?.error || 'Something went wrong!');
+      else {
+        let lesson = lessonDetails[activeLesson]
+        setLessonDetails((prevDetails) => ({
+          ...prevDetails,
+          [activeLesson]: {...lesson, assessment: res.data},
+        }));
+        setSubmitted(true)
+        setSubmittedAnswers(JSON.parse(JSON.stringify(selectedAnswers)))
+        setLessonCompleted(res.data.completed)
+      }
+    })
+  }
+
+  const computePoints = (lesson) => {
+    if (!lesson) return 0
+    let total_points = lesson.assessment.questions.reduce((points, quiz) => {return points + quiz.points},0)
+    let total_penalties = lesson.assessment.questions.reduce((penalties, quiz) => {return penalties + quiz.lost_points},0)
+    return total_points - total_penalties
+  }
+
+  const getCorrectionKlas = (lesson, question, answer) => {
+    if (lesson.completed && answer.is_correct) return 'text-success bg-success-light'
+    if (submitted) {
+      if(submittedAnswers[activeLesson][question.id] === answer.id){
+        if(answer.is_correct) return 'text-success bg-success-light'
+        else return 'text-danger bg-danger-light'
+      }
+    }
+    return ''
+  }
 
   const items = lessons?.map((lesson) => ({
       key: lesson.id,
       label: <div className="flex items-center">
-        {lesson.completed ? (
+        {((lessonCompleted && lesson.id === activeLesson) || lesson.completed) ? (
           <FaCheckCircle className="text-green-500 inline-block mr-2"/>
         ) : (
           <FaExclamationCircle className="text-orange-500 inline-block mr-2"/>
@@ -81,13 +143,14 @@ const LessonAccordion = ({ course }) => {
                 {index + 1}. {question?.name}
               </p>
               {question?.answers?.map((answer, optIndex) => (
-                <div key={optIndex} className="flex items-center mt-2">
+                <div key={optIndex} className={`flex items-center mt-2 ${getCorrectionKlas(lesson, question, answer)} rounded-sm px-2 w-full`}>
                   <input
                     type="radio"
                     name={`answer-${question.id}`}
                     id={`answer-${answer.id}`}
                     className="mr-2"
                     value={`${question.id}_${answer.id}`}
+                    onChange={handleAnswerChange}
                   />
                   <label htmlFor={`answer-${question.id}`}>
                     {answer.name}
@@ -96,6 +159,13 @@ const LessonAccordion = ({ course }) => {
               ))}
             </div>
           ))}
+          { lessonDetails[lesson.id]?.assessment?.completed === false &&
+            <div className="flex justify-start items-center gap-4 mt-8 mb-4">
+              <button onClick={handleSubmit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+              <p className="rounded-full bg-yellow-400 text-white font-bold text-lg px-2 py-1">+ {computePoints(lessonDetails[lesson.id])}XP</p>
+              {error && <p className="text-red-600">{error}</p>}
+            </div>
+          }
         </div>
       </div>
     })

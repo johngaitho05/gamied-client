@@ -4,6 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        danger: '#dc3545',
+        success: '#28a745',
+        'danger-light': '#f8d7da',
+        'success-light': '#d4edda',
         primary: {
           DEFAULT: "#ffffff",
         },
