@@ -181,7 +181,7 @@ const ExamDetails = ({examId}) => {
           )}
         </div>
       </div>
-      {openModal && <ProgressBar percent={percent} from={prevPercent} to={percent} points={addedPoints} onClose={navigate('/exams')}/>}
+      {openModal && <ProgressBar percent={percent} from={prevPercent} to={percent} points={addedPoints} onClose={() => navigate('/exams')}/>}
     </div>
   );
 };

@@ -5,12 +5,14 @@ import ProfileLoader from "../global/ProfileLoader.jsx";
 
 const ProfileCards = () => {
   const [userCourses, setUserCourses] = useState([]);
+  const [userExams, setUserExams] = useState([]);
   const { data: courses, isFetching:fetchingCourses } = useGetCoursesQuery();
   const { data: exams, isFetching: fetchingExams } = useGetAssessmentsQuery();
 
   useEffect(() => {
     setUserCourses(courses?.filter((course) => course.progress > 0));
-  }, [courses]);
+    setUserExams(exams?.filter((exam) => exam.result.score >= 0));
+  }, [courses, exams]);
 
   return (
     <div className=" min-h-screen  w-full ">
@@ -30,15 +32,16 @@ const ProfileCards = () => {
       {fetchingCourses && <ProfileLoader/>}
       <h2 className="text-2xl font-bold mt-7 px-4">Attempted Exams</h2>
       <div className=" p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-        {exams?.filter((exam) => exam.completed)?.map((exam) => (
+        {userExams?.map(exam => (
           <ProfileCard
             key={exam.id}
             name={exam?.title}
             progress={100}
             image={exam?.thumbnail}
+            status={`${exam.result.comment} - ${exam.result.score}%`}
           />
         ))}
-        {!fetchingExams && <p>No thing here yet!</p>}
+        {!userExams?.length && !fetchingExams && <p>No thing here yet!</p>}
       </div>
       {fetchingExams && <ProfileLoader/>}
     </div>

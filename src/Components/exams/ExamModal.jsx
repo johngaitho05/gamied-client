@@ -8,7 +8,7 @@ const ExamModal = ({ exam, onClose, onProceed }) => {
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
         <h2 className="text-lg font-bold mb-4">{exam.title}</h2>
         <p className="mb-4">{exam?.description}</p>
-        { exam.result.score > 0 &&
+        { exam.result.score >= 0 &&
           <div className="results leading-7">
             <h3 className="text-md font-bold">Results</h3>
             <p><span className="text-cta">Status:</span> {exam.result.comment}</p>

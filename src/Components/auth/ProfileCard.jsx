@@ -1,4 +1,4 @@
-const ProfileCard = ({ name, progress, image }) => {
+const ProfileCard = ({ name, progress, image, status=null }) => {
   return (
     <div className="max-w-5xl rounded shadow-lg flex  h-[100px] bg-white">
       <div>
@@ -8,13 +8,19 @@ const ProfileCard = ({ name, progress, image }) => {
         <div className="font-bold text-sm mb-2">{name}</div>
 
         <div className="mt-5">
-          <div className="w-full bg-[#eee] rounded-full">
+          {!status && <div className="w-full bg-[#eee] rounded-full">
             <div
               className="text-white font-bold text-xs leading-none  text-center bg-cta rounded-full"
-              style={{ width: `${progress}%` }}>
+              style={{width: `${progress}%`}}>
               {progress}%
             </div>
-          </div>
+          </div>}
+          {status &&
+            <p>
+              <span>Status: </span>
+              <span className={status.includes('Fail') ? 'text-danger' : 'text-success'}>{status}</span>
+            </p>
+          }
         </div>
       </div>
     </div>

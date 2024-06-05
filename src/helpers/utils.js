@@ -1,4 +1,4 @@
-export const baseUrl = "https://api.gamied.tech";
+export const baseUrl = "http://localhost:8000";
 
 export const getUser = () => {
   let user = localStorage.getItem("user");
