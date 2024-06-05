@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Layout from "../Components/global/Layout.jsx";
-import Courses from "../Components/auth/Courses.jsx";
+import ProfileCards from "../Components/auth/ProfileCards.jsx";
 import Sidebar from "../Components/auth/Sidebar.jsx";
 
 const ProfilePage = () => {
@@ -13,7 +13,7 @@ const ProfilePage = () => {
         </Col>
 
         <Col xs={24} sm={24} md={16} lg={17}>
-          <Courses />
+          <ProfileCards />
         </Col>
       </Row>
     </Layout>

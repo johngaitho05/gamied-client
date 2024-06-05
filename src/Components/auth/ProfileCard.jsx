@@ -1,4 +1,4 @@
-const CourseCard = ({ name, progress, image }) => {
+const ProfileCard = ({ name, progress, image }) => {
   return (
     <div className="max-w-5xl rounded shadow-lg flex  h-[100px] bg-white">
       <div>
@@ -21,4 +21,4 @@ const CourseCard = ({ name, progress, image }) => {
   );
 };
 
-export default CourseCard;
+export default ProfileCard;

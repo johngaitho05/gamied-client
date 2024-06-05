@@ -26,7 +26,6 @@ export const formatTimeClock = (seconds) => {
 
 
 export const formatTimeStr = (timeAllowed) => {
-    console.log("timeAllowed", timeAllowed)
     const hours = Math.floor(timeAllowed / 60);
     const minutes = timeAllowed % 60;
     return hours > 0

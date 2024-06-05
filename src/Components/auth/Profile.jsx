@@ -1,12 +1,12 @@
 import React from "react";
-import Courses from "./Courses.jsx";
+import ProfileCards from "./ProfileCards.jsx";
 import Sidebar from "./Sidebar.jsx";
 
 const Profile = () => {
   return (
     <div>
       <Sidebar/>
-      <Courses />
+      <ProfileCards />
     </div>
   );
 };
