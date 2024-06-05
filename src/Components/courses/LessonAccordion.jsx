@@ -5,9 +5,13 @@ import {
   FaExclamationCircle,
 } from "react-icons/fa";
 import {Collapse, Spin} from "antd";
-import {useGetLessonDetailsQuery, useSubmitAssessmentMutation} from "../../redux/apis/apiSlice.js";
+import {useGetLessonDetailsQuery, useSubmitAssessmentMutation, useGetUserDetailsQuery} from "../../redux/apis/apiSlice.js";
+import ProgressBar from "../global/ProgressModal.jsx";
+import {getUser, getUserTarget} from "../../helpers/utils.js";
 
 const LessonAccordion = ({ course }) => {
+  const user = getUser()
+  const target = getUserTarget(user)
   const lessons = course.lessons
   const courseId = course.id
   const [activeLesson, setActiveLesson] = useState(null);
@@ -19,7 +23,12 @@ const LessonAccordion = ({ course }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null)
   const [submitted, setSubmitted] = useState(false)
+  const {data:userData, refetch: refetchUserDetails} = useGetUserDetailsQuery(null, {skip: !submitted})
   const [submitAssessment, { isSubmitting }] = useSubmitAssessmentMutation();
+  const [prevPercent, setPrevPercent] = useState(0)
+  const [percent, setPercent] = useState(Math.round(user.points/target * 100))
+  const [openModal, setOpenModal] = useState(false)
+  const [addedPoints, setAddedPoints] = useState(0)
 
 
   useEffect(() => {
@@ -64,6 +73,7 @@ const LessonAccordion = ({ course }) => {
 
   const handleSubmit = () => {
     setError(null)
+    setSubmitted(false)
     let lesson = lessonDetails[activeLesson]
     let count = Object.keys(selectedAnswers[activeLesson]).length
     if(count !== lesson.assessment.questions.length){
@@ -76,7 +86,7 @@ const LessonAccordion = ({ course }) => {
         answers: selectedAnswers[activeLesson]
       }
     }
-    submitAssessment(data).then((res)=>{
+    submitAssessment(data).then(async (res) => {
       if (!res?.data) setError(res?.error?.data?.error || 'Something went wrong!');
       else {
         let lesson = lessonDetails[activeLesson]
@@ -91,6 +101,28 @@ const LessonAccordion = ({ course }) => {
     })
   }
 
+  useEffect(() => {
+    if (submitted) {
+      const fetchUserDetails = async () => {
+        try {
+          const userData = await refetchUserDetails();
+          return userData.data;
+        } catch (err) {
+          console.error("Failed to fetch user details:", err);
+        }
+      };
+      fetchUserDetails().then((userData) => {
+        if (userData.points !== user.points){
+          setAddedPoints(userData.points - user.points)
+          setPrevPercent(percent)
+          setPercent(Math.round(userData.points/target * 100))
+          setOpenModal(true)
+        }
+        localStorage.setItem("user", JSON.stringify(userData));
+      });
+    }
+  }, [submitted, refetchUserDetails]);
+
   const computePoints = (lesson) => {
     if (!lesson) return 0
     let total_points = lesson.assessment.questions.reduce((points, quiz) => {return points + quiz.points},0)
@@ -101,7 +133,7 @@ const LessonAccordion = ({ course }) => {
   const getCorrectionKlas = (lesson, question, answer) => {
     if (lesson.completed && answer.is_correct) return 'text-success bg-success-light'
     if (submitted) {
-      if(submittedAnswers[activeLesson][question.id] === answer.id){
+      if(submittedAnswers[activeLesson] && submittedAnswers[activeLesson][question.id] === answer.id){
         if(answer.is_correct) return 'text-success bg-success-light'
         else return 'text-danger bg-danger-light'
       }
@@ -181,11 +213,14 @@ const LessonAccordion = ({ course }) => {
   )
 
   return (
-    <Collapse accordion items={items}
-              expandIconPosition="end"
-              activeKey={activeLesson}
-              onChange={handlePanelChange}
-    />
+    <div>
+      {openModal && <ProgressBar percent={percent} from={prevPercent} to={percent} points={addedPoints}/>}
+      <Collapse accordion items={items}
+                expandIconPosition="end"
+                activeKey={activeLesson}
+                onChange={handlePanelChange}
+      />
+    </div>
   );
 };
 

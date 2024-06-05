@@ -10,7 +10,7 @@ const CourseCard = ({ name, progress, image }) => {
         <div className="mt-5">
           <div className="w-full bg-[#eee] rounded-full">
             <div
-              className="bg-blue text-xs leading-none  text-center text-cta rounded-full"
+              className="text-white font-bold text-xs leading-none  text-center bg-cta rounded-full"
               style={{ width: `${progress}%` }}>
               {progress}%
             </div>

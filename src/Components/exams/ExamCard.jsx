@@ -4,6 +4,7 @@ import { FaTimesCircle, FaCheckCircle, FaHourglassHalf } from "react-icons/fa";
 import { Card } from "antd";
 import { BsClockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import {formatTimeStr} from "../../helpers/utils.js";
 
 const ExamCard = ({ exam, handleExamClick }) => {
   const getStatusStyle = (status) => {
@@ -32,16 +33,6 @@ const ExamCard = ({ exam, handleExamClick }) => {
     }
   };
 
-  const formatTime = (timeAllowed) => {
-    const hours = Math.floor(timeAllowed / 60);
-    const minutes = timeAllowed % 60;
-    return hours > 0
-      ? `${hours} hr${hours > 1 ? "s" : ""} ${
-          minutes > 0 ? `${minutes} min` : ""
-        }`
-      : `${minutes} min`;
-  };
-
   const navigate = useNavigate();
 
   return (
@@ -64,7 +55,7 @@ const ExamCard = ({ exam, handleExamClick }) => {
             <BsClockFill className="text-gray-500" />
           </span>
           <p className="text-sm text-gray-600">
-            {formatTime(exam?.time_allowed)}
+            {formatTimeStr(exam?.time_allowed)}
           </p>
         </div>
         <button

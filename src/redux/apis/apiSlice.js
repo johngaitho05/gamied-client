@@ -12,14 +12,14 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery(
       { baseUrl,
-        prepareHeaders: (headers) => {
-            let token = getAccessToken()
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+          prepareHeaders: (headers) => {
+              let token = getAccessToken()
+              if (token) {
+                  headers.set('Authorization', `Bearer ${token}`);
+              }
+              return headers;
+          },
+      }),
     endpoints: (builder) => ({
         getToken: builder.mutation({
             query: (body) => createRequest(`/auth/token`, 'POST', body),
@@ -54,9 +54,6 @@ export const apiSlice = createApi({
         }),
         submitAssessment: builder.mutation({
             query: (data) => createRequest(`/assessments/${data.assessmentId}/submit`, 'POST', data.body, true),
-            async onQueryStarted(body, { dispatch }) {
-                dispatch(apiSlice.util.invalidateTags(['lessonDetails']));
-            },
         }),
     }),
 });

@@ -12,7 +12,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [getToken, { isLoading }] = useGetTokenMutation();
   const [token, setToken] = useState(null);
-  const [userDetails, setUserDetails] = useState(null);
   const { refetch: refetchUserDetails } = useGetUserDetailsQuery(null, {
     skip: !token,
   });
@@ -29,16 +28,12 @@ const LoginForm = () => {
           console.error("Failed to fetch user details:", err);
         }
       };
-      fetchUserDetails().then((userData) => setUserDetails(userData));
+      fetchUserDetails().then((userData) => {
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/");
+      });
     }
   }, [token, refetchUserDetails]);
-
-  useEffect(() => {
-    if (userDetails) {
-      localStorage.setItem("user", JSON.stringify(userDetails));
-      navigate("/");
-    }
-  }, [userDetails]);
 
   const handleSubmit = async (formData) => {
     setError("");

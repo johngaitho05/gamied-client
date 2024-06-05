@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useGetAssessmentDetailsQuery } from '../../redux/apis/apiSlice.js'
+import {useGetAssessmentDetailsQuery, useGetUserDetailsQuery, useSubmitAssessmentMutation} from '../../redux/apis/apiSlice.js'
+import {LoadingOutlined} from "@ant-design/icons";
+import {Spin} from "antd";
+import {formatTimeClock, getUser, getUserTarget} from '../../helpers/utils.js'
+import ProgressBar from "../global/ProgressModal.jsx";
+import {useNavigate} from "react-router-dom";
 
 const ExamDetails = ({examId}) => {
+  const user = getUser();
+  const target = getUserTarget(user)
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questions, setQuestions] = useState([])
-  const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
   const {data: exam, isFetching} = useGetAssessmentDetailsQuery(examId)
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [submitAssessment, { isSubmitting }] = useSubmitAssessmentMutation();
+  const [submitted, setSubmitted] = useState(false)
+  const {data:userData, refetch: refetchUserDetails} = useGetUserDetailsQuery(null, {skip: !submitted})
+  const [error, setError] = useState(null)
+  const [prevPercent, setPrevPercent] = useState(0)
+  const [percent, setPercent] = useState(Math.round(user.points/target * 100))
+  const [openModal, setOpenModal] = useState(false)
+  const [addedPoints, setAddedPoints] = useState(0)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -37,13 +53,13 @@ const ExamDetails = ({examId}) => {
 
   useEffect(() => {
     if(exam) {
-      console.log("exam", exam)
       setQuestions(exam.questions)
+      setTimeLeft(exam.time_allowed * 60)
     }
   }, [exam]);
 
-  const handleOptionChange = (questionId, answer) => {
-    setSelectedAnswers({ ...selectedAnswers, [questionId]: answer });
+  const handleOptionChange = (questionId, answerId) => {
+    setSelectedAnswers({ ...selectedAnswers, [questionId]: answerId });
   };
 
   const handleNext = () => {
@@ -55,16 +71,47 @@ const ExamDetails = ({examId}) => {
   };
 
   const handleSubmit = () => {
-    window.removeEventListener("beforeunload", handleBeforeUnload);
-    console.log("Submitting exam with answers:", selectedAnswers);
-    // Add your submit logic here
+    setError(null)
+    setSubmitted(false)
+    if(isSubmitting) return
+    let data = {
+      assessmentId: examId,
+      body: {
+        answers: selectedAnswers,
+        time_taken: Math.round((exam.time_allowed * 60 - timeLeft)/60)
+      },
+    }
+    submitAssessment(data).then((res)=> {
+      if (!res?.data) setError(res?.error?.data?.error || 'Something went wrong!');
+      else {
+        setSubmitted(true)
+      }
+    })
   };
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-  };
+  useEffect(() => {
+    if (submitted) {
+      const fetchUserDetails = async () => {
+        try {
+          const userData = await refetchUserDetails();
+          return userData.data;
+        } catch (err) {
+          console.error("Failed to fetch user details:", err);
+        }
+      };
+      fetchUserDetails().then((userData) => {
+        if (userData.points !== user.points) {
+          setAddedPoints(userData.points - user.points)
+          setPrevPercent(percent)
+          setPercent(Math.round(userData.points / target * 100))
+          setOpenModal(true)
+          localStorage.setItem("user", JSON.stringify(userData));
+        }else{
+          navigate('/exams')
+        }
+      });
+    }
+  }, [submitted, refetchUserDetails]);
 
   return (
 
@@ -74,25 +121,26 @@ const ExamDetails = ({examId}) => {
         <span>
           Question {currentQuestion + 1} of {questions?.length}
         </span>
-        <span>Time Left: {formatTime(timeLeft)}</span>
+        <span>Time Left: {formatTimeClock(timeLeft)}</span>
       </div>
       <div className="border p-4 rounded-lg">
         <h2 className="text-lg font-semibold mb-4">
           {questions && questions[currentQuestion]?.name}
         </h2>
         <div>
-          {questions && questions[currentQuestion]?.answers?.map((answer, index) => (
-            <label key={index} className="block mb-2">
+          {questions && questions[currentQuestion]?.answers?.map((answer) => (
+            <label key={answer.id} className="block mb-2">
               <input
+
                 type="radio"
-                name={`question-${currentQuestion}`}
-                value={answer.name} // Changed from `answer` to `answer.name`
-                checked={
-                  selectedAnswers[questions[currentQuestion].id] === answer.name
-                } // Ensure this is comparing the same thing
+                name={`answer-${answer.id}`}
+                value={answer.id}
                 onChange={() =>
-                  handleOptionChange(questions[currentQuestion].id, answer.name)
-                } // Changed to `answer.name`
+                  handleOptionChange(questions[currentQuestion].id, answer.id)
+                }
+                checked={
+                  selectedAnswers[questions[currentQuestion].id] === answer.id
+                }
                 className="mr-2"
               />
               {answer.name}
@@ -107,25 +155,33 @@ const ExamDetails = ({examId}) => {
           >
             Previous
           </button>
-          <button
-            onClick={handleNext}
-            disabled={currentQuestion === questions?.length - 1}
-            className="bg-blue hover:bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Next
-          </button>
-        </div>
-        {currentQuestion === questions?.length - 1 && (
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={handleSubmit}
-              className="bg-green-500 text-white px-4 py-2 rounded"
+          {error && <p className="text-red-600 float-end mt-2">{error}</p>}
+          {currentQuestion !== questions?.length - 1 &&
+            (<button
+              onClick={handleNext}
+              className="bg-blue hover:bg-blue-500 text-white px-4 py-2 rounded"
             >
-              Submit
-            </button>
-          </div>
-        )}
+              Next
+            </button>)
+          }
+          {currentQuestion === questions?.length - 1 && (
+            <div className="flex justify-end">
+              <button
+                onClick={handleSubmit}
+                className={`bg-green-500 text-white px-4 py-2 rounded ${isSubmitting && 'opacity-75 cursor-not-allowed'}`}
+              >
+                { isSubmitting ?
+                  <Spin className="text-white min-w-12"
+                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                  /> :
+                  'Submit'
+                }
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+      {openModal && <ProgressBar percent={percent} from={prevPercent} to={percent} points={addedPoints} onClose={navigate('/exams')}/>}
     </div>
   );
 };
