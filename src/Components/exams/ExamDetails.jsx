@@ -13,7 +13,7 @@ const ExamDetails = ({examId}) => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questions, setQuestions] = useState([])
   const {data: exam, isFetching} = useGetAssessmentDetailsQuery(examId)
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [submitAssessment, { isSubmitting }] = useSubmitAssessmentMutation();
   const [submitted, setSubmitted] = useState(false)
   const {data:userData, refetch: refetchUserDetails} = useGetUserDetailsQuery(null, {skip: !submitted})
@@ -37,8 +37,6 @@ const ExamDetails = ({examId}) => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(timer);
-          handleSubmit();
           return 0;
         }
         return prevTime - 1;
@@ -57,6 +55,13 @@ const ExamDetails = ({examId}) => {
       setTimeLeft(exam.time_allowed * 60)
     }
   }, [exam]);
+
+  useEffect(() => {
+    if(timeLeft <= 0){
+      handleSubmit()
+    }
+  }, [timeLeft]);
+
 
   const handleOptionChange = (questionId, answerId) => {
     setSelectedAnswers({ ...selectedAnswers, [questionId]: answerId });
