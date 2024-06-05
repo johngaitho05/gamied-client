@@ -53,6 +53,7 @@ const LessonAccordion = ({ course }) => {
   }, [activeLesson, refetchLessonDetails]);
 
   const handlePanelChange = (key) => {
+    setError(null)
     key = parseInt(key)
     if (key) {
       setActiveLesson(key);
@@ -75,7 +76,7 @@ const LessonAccordion = ({ course }) => {
     setError(null)
     setSubmitted(false)
     let lesson = lessonDetails[activeLesson]
-    let count = Object.keys(selectedAnswers[activeLesson]).length
+    let count = Object.keys(selectedAnswers[activeLesson] || {}).length
     if(count !== lesson.assessment.questions.length){
       setError('All questions must be answered!')
       return
@@ -83,7 +84,7 @@ const LessonAccordion = ({ course }) => {
     let data = {
       assessmentId: lesson.assessment.id,
       body: {
-        answers: selectedAnswers[activeLesson]
+        answers: selectedAnswers[activeLesson] || {}
       }
     }
     submitAssessment(data).then(async (res) => {
@@ -144,7 +145,7 @@ const LessonAccordion = ({ course }) => {
   const isChecked = (lesson, question, answer) => {
     if (answer.is_correct && lesson.completed) return true;
     if (selectedAnswers[activeLesson] && question.id in selectedAnswers[activeLesson]){
-      return selectedAnswers[activeLesson][question.id] === answer.id
+      return (selectedAnswers[activeLesson] || {})[question.id] === answer.id
     }
     return false
   }
