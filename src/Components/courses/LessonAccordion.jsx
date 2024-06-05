@@ -109,6 +109,14 @@ const LessonAccordion = ({ course }) => {
     return ''
   }
 
+  const isChecked = (lesson, question, answer) => {
+    if (answer.is_correct && lesson.completed) return true;
+    if (selectedAnswers[activeLesson] && question.id in selectedAnswers[activeLesson]){
+      return selectedAnswers[activeLesson][question.id] === answer.id
+    }
+    return false
+  }
+
   const items = lessons?.map((lesson) => ({
       key: lesson.id,
       label: <div className="flex items-center">
@@ -147,6 +155,7 @@ const LessonAccordion = ({ course }) => {
                   <input
                     type="radio"
                     name={`answer-${question.id}`}
+                    checked={isChecked(lesson, question, answer)}
                     id={`answer-${answer.id}`}
                     className="mr-2"
                     value={`${question.id}_${answer.id}`}
