@@ -1,5 +1,5 @@
 # GamiEd
-GamiEd a gamified e-learning platform meant to administer short courses to employees in an organization.Courses are organized in Lessons and Each lesson has a Quiz section that earns points to the user. The points earned are used to promote the user using a predefined levels scheme.
+GamiEd is an innovative Elearning platform designed to facilitate short courses and exams for organizations seeking to enhance employee development. The platform employs gamification elements to engage users and enhance learning outcomes. Each course is structured into lessons, consisting of course materials followed by a quiz. Points (XP) are awarded for correct quiz answers, with deductions for wrong attempts. Users progress through six levels based on accumulated XP, providing a clear framework for skill advancement.
 
 The application is built with React JS
 
