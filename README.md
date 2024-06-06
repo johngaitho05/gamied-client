@@ -17,5 +17,5 @@ npm run dev
 
 ![Profile](src/assets/profile.png)
 
-![Exam](src/assets/homepage.png)
+![Exam](src/assets/exam.png)
 
